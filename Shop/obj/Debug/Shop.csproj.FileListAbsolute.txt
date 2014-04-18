@@ -1,0 +1,5 @@
+c:\users\work\documents\visual studio 2012\Projects\Shop\Shop\bin\Shop.dll
+c:\users\work\documents\visual studio 2012\Projects\Shop\Shop\bin\Shop.pdb
+c:\users\work\documents\visual studio 2012\Projects\Shop\Shop\obj\Debug\Shop.csprojResolveAssemblyReference.cache
+c:\users\work\documents\visual studio 2012\Projects\Shop\Shop\obj\Debug\Shop.dll
+c:\users\work\documents\visual studio 2012\Projects\Shop\Shop\obj\Debug\Shop.pdb
