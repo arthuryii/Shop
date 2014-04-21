@@ -1,10 +1,21 @@
 ﻿#logo {
     width: 192px;
     height: 48px;
-    background-image: url('/imgs/logo.png');
+    background-image: url('../imgs/logo.png');
     background-repeat: no-repeat;
 }
 
 #content {
     padding: 60px 15px 60px;
+}
+
+.hidden{
+    display:none;
+}
+.preview-sm{
+    width:150px;
+    height:200px;
+}
+.left-5{
+    margin-left:5px;
 }

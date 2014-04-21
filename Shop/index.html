@@ -9,6 +9,7 @@
     <script src="js/jquery-1.9.1.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/bootbox.min.js"></script>
+    <script src="data/shell_list.js"></script>
     <script src="js/action.js"></script>
 </head>
 <body>
@@ -51,10 +52,28 @@
             </div>
         </div>
     </header>
-    <div class="container-fluid panel-default" id="content">
-        
+    <div class="hidden">
+        <div data-key="item">
+            <div class="row">
+
+            </div>
+        </div>
+    </div>
+    <div id="content">
+        <div class="panel panel-default">
+            <div class="panel-heading">筛选：
+                <div class="navbar-right">Collapse</div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">品牌：</div>
+                    <div class="col-md-1">品牌1</div>
+                </div>
+            </div>
+        </div>
+        <div id="items" class="well">
+        </div>
     </div>
     <footer class="navbar navbar-inverse navbar-fixed-bottom"></footer>
-    <a href="javascript:addBookmark(bookmarkname,'http://'+document.location.host+'/');" target="_self">加入收藏</a>
 </body>
 </html>
