@@ -9,11 +9,16 @@
     <script src="js/jquery-1.9.1.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/bootbox.min.js"></script>
-    <script src="data/shell_list.js"></script>
+    <script src="js/Debouncer.js"></script>
+    <script src="js/angular.headroom.js"></script>
+    <script src="js/features.js"></script>
+    <script src="js/headroom.js"></script>
+    <script src="js/jQuery.headroom.js"></script>
+    <script src="data/dataTemplate.js"></script>
     <script src="js/action.js"></script>
 </head>
 <body>
-    <header class="navbar navbar-default navbar-fixed-top">
+    <header id="header" data-headroom="" class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -55,19 +60,17 @@
     <div class="hidden">
         <div data-key="item">
             <div class="row">
-
             </div>
         </div>
     </div>
     <div id="content">
         <div class="panel panel-default">
-            <div class="panel-heading">筛选：
-                <div class="navbar-right">Collapse</div>
+            <div class="panel-heading">
+                筛选：
+                <div id="btn-collapse" class="label label-primary navbar-right">隐藏</div>
             </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-1">品牌：</div>
-                    <div class="col-md-1">品牌1</div>
+            <div id="filter-container">
+                <div class="container-fluid" id="filter">
                 </div>
             </div>
         </div>

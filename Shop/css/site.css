@@ -19,3 +19,22 @@
 .left-5{
     margin-left:5px;
 }
+.text-price {
+    font-weight:bold;
+    font-family:Verdana;
+}
+.text-title {
+    height:40px;
+    overflow:hidden;
+}
+.label-lg {
+    line-height:40px;
+    height:40px;
+}
+.nav-pills > li > a {
+    padding:0 15px;
+    line-height:40px;
+}
+#btn-collapse {
+    cursor:pointer;
+}

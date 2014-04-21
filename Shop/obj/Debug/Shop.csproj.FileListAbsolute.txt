@@ -3,3 +3,8 @@ c:\users\work\documents\visual studio 2012\Projects\Shop\Shop\bin\Shop.pdb
 c:\users\work\documents\visual studio 2012\Projects\Shop\Shop\obj\Debug\Shop.csprojResolveAssemblyReference.cache
 c:\users\work\documents\visual studio 2012\Projects\Shop\Shop\obj\Debug\Shop.dll
 c:\users\work\documents\visual studio 2012\Projects\Shop\Shop\obj\Debug\Shop.pdb
+C:\Users\Work\Documents\GitHub\Shop\Shop\bin\Shop.dll
+C:\Users\Work\Documents\GitHub\Shop\Shop\bin\Shop.pdb
+C:\Users\Work\Documents\GitHub\Shop\Shop\obj\Debug\Shop.csprojResolveAssemblyReference.cache
+C:\Users\Work\Documents\GitHub\Shop\Shop\obj\Debug\Shop.dll
+C:\Users\Work\Documents\GitHub\Shop\Shop\obj\Debug\Shop.pdb
