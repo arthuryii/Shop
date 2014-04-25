@@ -56,7 +56,6 @@ Headroom.prototype = {
    * Initialises the widget
    */
   init: function () {
-      console.log(Headroom.cutsTheMustard);
     if(!Headroom.cutsTheMustard) {
       return;
     }
@@ -66,7 +65,6 @@ Headroom.prototype = {
     // defer event registration to handle browser 
     // potentially restoring previous scroll position
     setTimeout(this.attachEvent.bind(this), 100);
-    console.log(this);
     return this;
   },
 

@@ -81,6 +81,7 @@
     <Content Include="js\jQuery.headroom.js" />
     <Content Include="res\p1.htm" />
     <Content Include="res\p2.htm" />
+    <Content Include="select.html" />
     <Content Include="uploaded\shell-x %281%29.jpg" />
     <Content Include="uploaded\shell-x %2810%29.jpg" />
     <Content Include="uploaded\shell-x %2811%29.jpg" />

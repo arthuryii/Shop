@@ -1,0 +1,1392 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="charset" content="utf-8">
+    <script type="text/javascript">
+        var domainName = '.jd.com', paras=(location.href.split(".html")[0]).split("-");
+        var urlArr = (location.href.split(".html")[0]).split("-");
+        var psid1 = 9987;
+        var psid2 = 830;
+        var psid3 = 866;
+
+        var jd = {}; jd.plist = {}; jd.iplocation = { "北京": 1, "上海": 2, "天津": 3, "重庆": 4, "河北": 5, "山西": 6, "河南": 7, "辽宁": 8, "吉林": 9, "黑龙江": 10, "内蒙古": 11, "江苏": 12, "山东": 13, "安徽": 14, "浙江": 15, "福建": 16, "湖北": 17, "湖南": 18, "广东": 19, "广西": 20, "江西": 21, "四川": 22, "海南": 23, "贵州": 24, "云南": 25, "西藏": 26, "陕西": 27, "甘肃": 28, "青海": 29, "宁夏": 30, "新疆": 31, "台湾": 32, "香港": 42, "澳门": 43 };
+        jd.plist.getNameById = function(id) { for (var o in jd.iplocation) { if (jd.iplocation[o] == id) return o;} return "北京" ;};
+        jd.plist.cookieEditer = {
+            getCookie: function(name) { var start = document.cookie.indexOf(name + "="); var len = start + name.length + 1; if ((!start) && (name != document.cookie.substring(0, name.length))) return null; if (start == -1) return null; var end = document.cookie.indexOf(';', len); if (end == -1) end = document.cookie.length; return unescape(document.cookie.substring(len, end)) },
+            setCookie: function(name, value, expires, path, domain, secure) {
+                var today = new Date();
+                today.setTime(today.getTime());
+                if (expires)
+                    expires = expires * 1000 * 60 * 60 * 24;
+                var expires_date = new Date(today.getTime() + (expires));
+                document.cookie = name + '=' + escape(value) + ((expires) ? ';expires=' + expires_date.toGMTString() : '') + ((path) ? ';path=' + path : '') + ((domain) ? ';domain=' + domain : '') + ((secure) ? ';secure' : '');
+            }
+        };
+            jd.plist.locationProcess = function() {
+
+                var proid;
+
+                if(paras[1]==6880||paras[2]==655 || paras[1]==794){
+                    proid  = this.cookieEditer.getCookie("ipLoc-djd");
+
+
+                    if (!proid||proid=="0-0-0"||proid.split("-").length < 3) {
+                        proid = "1-72-4137".split('-');
+                    } else {
+                        proid = proid.split("-");
+                    }
+
+                    proid[3] = "33"
+                }else{
+                    proid  = this.cookieEditer.getCookie("ipLoc-djd");
+
+                    if (!proid||proid=="0-0-0"||proid.split("-").length < 3) {
+                        proid = "1-72-4137".split('-');
+                    } else {
+                        proid = proid.split("-");
+                    }
+
+                    proid[3] = "0"
+                }
+
+
+                var url = location.href.toLowerCase(),pl=paras.length;
+            if (pl == 3) {
+                url = url.replace(".html", "-0-0-0-0-0-0-0-1-1-1-1-" + proid[0] + "-"+proid[1] + "-" + proid[2] + "-" + proid[3] + ".html");
+            } else if (pl == 13) { //手机、运营商支持一品多商和分区之前的不带库存的url长度=13
+                paras[13]=1;paras[14]=proid[0]; paras[15]=proid[1];paras[16]=proid[2]; paras[17]=proid[3]; url=paras.join("-")+".html";
+            } else if (pl == 14) { //手机、运营商支持一品多商至支持分区之间的不带库存的url长度=14
+                paras[14]=proid[0]; paras[15]=proid[1];paras[16]=proid[2]; paras[17]=proid[3]; url=paras.join("-")+".html";
+            } else if (pl == 16) { //手机、运营商支持一品多商和分区之前带库存的url长度=15
+                paras[13]=1;paras[14]=proid[0]; paras[15]=proid[1];paras[16]=proid[2]; paras[17]=proid[3]; url=paras.join("-")+".html";
+            } else if (pl == 17 && paras[1]=="794") { //大家电支持一品多商之前带库存的url长度=16
+                paras[17]=paras[16]; paras[16]=paras[15]; paras[15]=paras[14]; paras[14]=paras[13]; paras[13]=1;url=paras.join("-")+".html";
+            } else if (pl == 17 && paras[1]!="794") { //手机、运营商支持一品多商至分区之间带库存的url长度=16
+                paras[17]=paras[16]; paras[14]=proid[0]; paras[15]=proid[1];paras[16]=proid[2];  url=paras.join("-")+".html";
+            } else if (pl == 18 && (paras[14]!=proid[0])||paras[15]!=proid[1]||paras[16]!=proid[2]) {
+                this.cookieEditer.setCookie("ipLoc-djd", paras[14]+"-"+paras[15]+"-"+paras[16], 30, "/", domainName, false);
+                var proname = jd.plist.getNameById(paras[14]);
+                this.cookieEditer.setCookie("ipLocation", proname, 30, "/", domainName, false);
+                this.cookieEditer.setCookie("areaId", paras[14], 30, "/", domainName, false);
+            }
+            if (url != location.href.toLowerCase()) {
+                window.location = url;
+            }
+        };
+        jd.plist.locationProcess();
+    </script>
+    <title>软套手机保护套 【行情 价格 评价 正品行货】-京东商城</title>
+<meta name="keywords" content="手机,手机配件,手机保护套,软套手机保护套报价、促销、新闻、评论、导购、图片" />
+<meta name="description" content="京东JD.COM是国内最专业的手机,手机配件,手机保护套,软套手机保护套网上购物商城，本频道提供手机,手机配件,手机保护套,软套手机保护套的最新报价、促销、评论、导购、图片等相关信息" />
+
+    <script>var jdpts = new Object(); jdpts._st = new Date().getTime();</script>
+    <link rel="stylesheet" type="text/css" href="http://misc.360buyimg.com/lib/skin/2013/base.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="http://misc.360buyimg.com/201007/skin/df/plist20131112.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="http://misc.360buyimg.com/contrast/skin/2012/pop_compare.css?t=20121220" media="all" />
+
+    
+    <script type="text/javascript" src="http://misc.360buyimg.com/lib/js/e/jquery-1.2.6.pack.js"></script>
+    <script type="text/javascript">window.pageConfig = { compatible: true }; </script>
+</head>
+<body>
+<script type="text/javascript" src="http://misc.360buyimg.com/lib/js/2012/base-2011.js" charset="gb2312"></script>
+<div id="shortcut-2013">
+    <div class="w">
+        <ul class="fl lh">
+            <li class="fore1 ld"><b></b><a href="javascript:addToFavorite()" rel="nofollow">收藏京东</a></li>
+        </ul>
+        <ul class="fr lh">
+            <li class="fore1" id="loginbar">您好！欢迎来到京东！<a href="javascript:login()">[登录]</a>&nbsp;<a href="javascript:regist()">[免费注册]</a></li>
+            <li class="fore2 ld">
+                <s></s>
+                <a href="http://jd2008.jd.com/JdHome/OrderList.aspx" rel="nofollow">我的订单</a>
+            </li>
+            <li class="fore2-1 ld" id="jd-vip">
+                <s></s>
+                <a target="_blank" rel="nofollow" clstag="homepage|keycount|home2013|huiyuanjulebu" href="http://vip.jd.com">会员俱乐部</a>
+            </li>
+            <li class="fore3 ld menu" id="app-jd" data-widget="dropdown" clstag="homepage|keycount|home2013|01d">
+                <s></s><i></i><span class="outline"></span><span class="blank"></span>
+                <a href="http://app.jd.com/" target="_blank">手机京东</a><b></b>
+                <div class="dd lh">
+                    <div class="qr-code">
+                        <img id="app-qrcode-img" data-img="1" trigger-lazy-img="done" class="err-product" width="76" height="76" alt="手机京东" src="http://misc.360buyimg.com/lib/skin/2013/i/app_QRcode.png"><i></i>
+                        <div class="details"><em>扫描我，即刻下载</em><strong>京东客户端</strong></div>
+                    </div>
+                    <div class="app-btn">
+                        <a href="http://itunes.apple.com/cn/app/id414245413" target="_blank" class="btn-app-apple"></a>
+                        <a href="http://app.jd.com/download/android/360buy.apk" target="_blank" class="btn-app-android"></a>
+                    </div>
+                </div>
+            </li>
+            <li class="fore4 ld menu" id="biz-service" data-widget="dropdown">
+                <s></s>
+                <span class="outline"></span>
+                <span class="blank"></span>
+                客户服务
+                <b></b>
+                <div class="dd">
+                    <div><a href="http://help.jd.com/index.html" target="_blank">帮助中心</a></div>
+                    <div><a href="http://myjd.jd.com/repair/orderlist.action" target="_blank" rel="nofollow">售后服务</a></div>
+                    <div><a href="http://chat.jd.com/jdchat/custom.action" target="_blank" rel="nofollow">在线客服</a></div>
+                    <div><a href="http://myjd.jd.com/opinion/list.action" target="_blank" rel="nofollow">投诉中心</a></div>
+                    <div><a href="http://www.jd.com/contact/service.html" target="_blank">客服邮箱</a></div>
+                </div>
+            </li>
+            <li class="fore5 ld menu" id="site-nav" data-widget="dropdown">
+                <s></s>
+                <span class="outline"></span>
+                <span class="blank"></span>
+                网站导航
+                <b></b>
+                <div class="dd lh">
+                    <dl class="item fore1">
+                        <dt>特色栏目</dt>
+                        <dd>
+                            <div><a target="_blank" href="http://my.jd.com/personal/guess.html">为我推荐</a></div>
+                            <div><a target="_blank" href="http://shipingou.jd.com/">视频购物</a></div>
+                            <div><a target="_blank" href="http://club.jd.com/">京东社区</a></div>
+                            <div><a target="_blank" href="http://xiaoyuan.jd.com/">校园频道</a></div>
+                            <div><a target="_blank" href="http://read.jd.com/">在线读书</a></div>
+                            <div><a target="_blank" href="http://diy.jd.com/">装机大师</a></div>
+                            <div><a target="_blank" href="http://market.jd.com/giftcard/">京东卡</a></div>
+                            <div><a target="_blank" href="http://channel.jd.com/jiazhuang.html">家装城</a></div>
+                            <div><a target="_blank" href="http://dapeigou.jd.com/">搭配购</a></div>
+                            <div><a target="_blank" href="http://xihuan.jd.com/">我喜欢</a></div>
+                        </dd>
+                    </dl>
+                    <dl class="item fore2">
+                        <dt>企业服务</dt>
+                        <dd>
+                            <div><a target="_blank" href="http://giftcard.jd.com/company/index">企业客户</a></div>
+                            <div><a target="_blank" href="http://sale.jd.com/p10997.html">办公直通车</a></div>
+                        </dd>
+                    </dl>
+                    <dl class="item fore3">
+                        <dt>旗下网站</dt>
+                        <dd>
+                            <div><a target="_blank" href="http://www.360top.com/">360TOP</a></div>
+                            <div><a target="_blank" href="http://www.minitiao.com/">迷你挑</a></div>
+                            <div><a target="_blank" href="http://en.jd.com/">English Site</a></div>
+                        </dd>
+                    </dl>
+                </div>
+            </li>
+        </ul>
+        <span class="clr"></span>
+    </div>
+</div>
+<!--shortcut end-->
+<!-- header start -->
+<div id="o-header-2013">
+    <div class="w" id="header-2013">
+        <div id="logo-2013" class="ld"><a href="http://www.jd.com/" hidefocus="true"><b></b><img src="http://misc.360buyimg.com/lib/img/e/logo-201305.png" width="270" height="60" alt="京东"></a></div>
+        <!--logo end-->
+        <div id="search-2013">
+            <div class="i-search ld">
+                <ul id="shelper" class="hide">
+                </ul>
+                <div class="form">
+                    <input type="text" class="text" accesskey="s" id="key" autocomplete="off" onkeydown="javascript:if(event.keyCode==13) search('key');">
+                    <input type="button" value="搜索" class="button" onclick="search('key');return false;">
+                </div>
+            </div>
+            <div id="hotwords"></div>
+        </div>
+        <!--search end-->
+        <div id="my360buy-2013">
+            <dl>
+                <dt class="ld"><s></s><a href="http://home.jd.com/">我的京东</a><b></b></dt>
+                <dd>
+                    <div class="loading-style1"><b></b>加载中，请稍候...</div>
+                </dd>
+            </dl>
+        </div>
+        <!--my360buy end-->
+        <div id="settleup-2013">
+            <dl>
+                <dt class="ld"><s></s><span class="shopping"><span id="shopping-amount"></span></span><a href="http://cart.jd.com/cart/cart.html" id="settleup-url">去购物车结算</a> <b></b> </dt>
+                <dd>
+                    <div class="prompt">
+                        <div class="loading-style1"><b></b>加载中，请稍候...</div>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+        <!--settleup end-->
+    </div>
+    <!--header end-->
+    <div class="w">
+        <div id="nav-2013">
+            <div id="categorys-2013">
+                <div class="mt ld">
+                    <h2><a href="http://www.jd.com/allSort.aspx">全部商品分类<b></b></a></h2>
+                </div>
+                <div id="_JD_ALLSORT" class="mc"></div>
+            </div>
+            <div id="treasure"></div>
+            <ul id="navitems-2013">
+                <li class="fore1" id="nav-home"><a href="http://www.jd.com/">首页</a></li>
+                <li class="fore2" id="nav-fashion"><a href="http://fashion.jd.com/">服装城</a></li>
+                <li class="fore3" id="nav-chaoshi"><a href="http://channel.jd.com/chaoshi.html">京东超市</a></li>
+                <li class="fore4" id="nav-tuan"><a href="http://tuan.jd.com/" target="_blank">团购</a></li>
+                <li class="fore5" id="nav-auction"><a href="http://auction.jd.com/">夺宝岛</a></li>
+                <li class="fore6" id="nav-shan"><a href="http://red.jd.com/">闪购</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    (function(){if(pageConfig.navId){var object=document.getElementById("nav-"+pageConfig.navId);if(object)object.className+=" curr";}})();
+</script>
+<!-- header end -->
+
+<div class="w">
+    <div class="breadcrumb">
+        <strong><a href="http://shouji.jd.com" >手机</a></strong><span>&nbsp;&gt;&nbsp;<a href="http://channel.jd.com/peijian.html" >手机配件</a>&nbsp;&gt;&nbsp;<a href="http://list.jd.com/9987-830-866.html" >手机保护套</a></span>
+&nbsp;&gt;&nbsp;<a href="http://list.jd.com/9987-830-866-0-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html" title="软套">软套</a>
+    </div>
+</div>
+<!--crumb end-->
+<div class="w main">
+    <div class="right-extra">
+        <div class="m" id="i-right">
+            <div id="hotsale" clstag="thirdtype|keycount|thirdtype|hotsaleM" reco_id="3">
+                <div class="mt"><h2>热卖推荐</h2></div>
+
+                <!--热销商品-->
+                
+<div class="mc list-h" rfid=361><dl><dt><a href="http://item.jd.com/986072.html" target="_blank"><img alt="摩米士（MOMAX） 法式天窗保护套 适用于苹果iPhone 5S 蓝色"src="http://img12.360buyimg.com/n4/g13/M06/10/04/rBEhU1JYu3cIAAAAAAFzdpVM3lIAAEC5gAlNyUAAXOO148.jpg"width="100" height="100"/></a></dt><dd><div class="p-name"><a href="http://item.jd.com/986072.html" target="_blank">摩米士（MOMAX） 法式天窗保护套 适用于苹果iPhone 5S 蓝色<font color="#ff6600"></font></a></div><div class="p-price"  sku='986072'>特价：<strong></strong></div><div class="btns"><a href="http://gate.jd.com/InitCart.aspx?pid=986072&amp;pcount=1&amp;ptype=1" target="_blank">立即抢购</a></div></dd></dl><dl><dt><a href="http://item.jd.com/987123.html" target="_blank"><img alt="卡登仕 双吸盘皮套 适用于苹果iPhone 5C 红色"src="http://img13.360buyimg.com/n4/g14/M02/15/0C/rBEhVVJcl3EIAAAAAAH1O4okfJcAAELdgKLu0YAAfVT718.jpg"width="100" height="100"/></a></dt><dd><div class="p-name"><a href="http://item.jd.com/987123.html" target="_blank">卡登仕 双吸盘皮套 适用于苹果iPhone 5C 红色<font color="#ff6600"></font></a></div><div class="p-price"  sku='987123'>特价：<strong></strong></div><div class="btns"><a href="http://gate.jd.com/InitCart.aspx?pid=987123&amp;pcount=1&amp;ptype=1" target="_blank">立即抢购</a></div></dd></dl><dl><dt><a href="http://item.jd.com/785824.html" target="_blank"><img alt="道瑞（x-doria）朗纹系列保护套  适用于三星Note2 N719/N7102/N7100/7108 尊贵黑 "src="http://img14.360buyimg.com/n4/g7/M03/11/01/rBEHZlDRH8wIAAAAAAGkZi9cpVkAADVHgD4JvcAAaR-765.jpg"width="100" height="100"/></a></dt><dd><div class="p-name"><a href="http://item.jd.com/785824.html" target="_blank">道瑞（x-doria）朗纹系列保护套  适用于三星Note2 N719/N7102/N7100/7108 尊贵黑 <font color="#ff6600"></font></a></div><div class="p-price"  sku='785824'>特价：<strong></strong></div><div class="btns"><a href="http://gate.jd.com/InitCart.aspx?pid=785824&amp;pcount=1&amp;ptype=1" target="_blank">立即抢购</a></div></dd></dl></div>
+
+            </div>
+            <script type="text/javascript" >
+
+
+                if("1315,11729,6144,9855,1320,1319,6233,1318,1672,5025,1316,9847,6994,1620,6728,6196,9987,670,652,737,12259,12218,9192".indexOf(psid1) != -1 && "2641,1502,1503,1505,1507,1504,794,798,870,1300,1706,1301".indexOf(psid3) == -1) {
+                        if( window.screen.width < 1210 ) {
+                            $('<iframe id="hotsaleFrame" onload="showHotsaleFrame();" scrolling="no" frameborder="0" style="width:590px;height: 153px;" class="hide" marginheight="0" marginwidth="0" src="http://x.jd.com/ad?ad_id=69&hj_id=46&tag=' + psid3 +  '&cid=' + psid1 + '-' + psid2 + '-' + psid3 + '"></iframe>')
+                                    .prependTo("#hotsale");
+                        } else {
+                            $('<iframe id="hotsaleFrame" onload="showHotsaleFrame();" scrolling="no" frameborder="0" style="width:810px;height: 153px;" class="hide" marginheight="0" marginwidth="0" src="http://x.jd.com/ad?ad_id=71&hj_id=46&tag=' + psid3 +  '&cid=' + psid1 + '-' + psid2 + '-' + psid3 + '"></iframe>')
+                                    .prependTo("#hotsale");
+                        }
+                }
+
+                function showHotsaleFrame(){
+                    $("#hotsale .mt").remove();
+                    $("#hotsale .mc").remove();
+
+                    $("#hotsaleFrame").show();
+                }
+
+
+
+
+            </script>
+            <div id="market" clstag="thirdtype|keycount|thirdtype|market"><div class="mt"><h2>促销活动</h2></div>
+                <div class="mc">
+                    <!--促销活动-->
+                    
+<ul><li>·<a href="http://www.jd.com/news.aspx?id=17474" target="_blank">来自星星的百万豪礼！ </a></li><li>·<a href="http://www.jd.com/news.aspx?id=17101" target="_blank">IWALK新品首发写感言送30元话费啦！</a></li><li>·<a href="http://www.jd.com/news.aspx?id=17071" target="_blank">联想S8手机八核高配版京东首发</a></li><li>·<a href="http://www.jd.com/news.aspx?id=16984" target="_blank">高性价比酷派5872晒单和评价赢好礼！</a></li><li>·<a href="http://www.jd.com/news.aspx?id=16965" target="_blank">摩米士配件 满200减20 满300减50</a></li></ul>
+
+                </div>
+            </div>
+        </div>
+        <div id='select' class='m' clstag='thirdtype|keycount|thirdtype|select'>
+<div class='mt'><h1>手机保护套<strong>&nbsp;-&nbsp;商品筛选</strong></h1></div>
+<div class='mc attrs'><div class="selected-c"><div class="attr"><div class="a-key">已选条件：</div><div class="a-values"><div class="v-fold"><ul class="f-list"><li propValueId="109776" ><a href="9987-830-866-0-0-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">类型：<strong>软套</strong><b></b></a></li></ul></div><div class="v-option"><a href="9987-830-866-0-0-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html"><span id="all-revocation">全部撤消</span></a></div></div></div></div><div class="brand-attr"><div class="attr"><div class="a-key">品牌：</div><div class="a-values"><div class="v-option"><span class="o-more" option="more" onclick="moreBrand();"><b></b>更多</span><span class="o-more fold hide" option="less" onclick="lessBrand();"><b></b>收起</span></div><div class="v-tabs"><ul class="tab hide"><li class="curr" rel="0">所有品牌<b></b></li><li rel="a" >A<b></b></li><li rel="b">B<b></b></li><li rel="c">C<b></b></li><li rel="d">D<b></b></li><li rel="e">E<b></b></li><li rel="f">F<b></b></li><li rel="g">G<b></b></li><li rel="h">H<b></b></li><li rel="i">I<b></b></li><li rel="j">J<b></b></li><li rel="k">K<b></b></li><li rel="l">L<b></b></li><li rel="m">M<b></b></li><li rel="n">N<b></b></li><li rel="o">O<b></b></li><li rel="p">P<b></b></li><li rel="q">Q<b></b></li><li rel="r">R<b></b></li><li rel="s">S<b></b></li><li rel="t">T<b></b></li><li rel="u">U<b></b></li><li rel="v">V<b></b></li><li rel="w">W<b></b></li><li rel="x">X<b></b></li><li rel="y">Y<b></b></li><li rel="z">Z<b></b></li><li rel="other">其它<b></b></li></ul><div class="tabcon undefined "><div style="display: block;"brand="less" rel="n" id="brand_id_ 13302"><a title="耐尔金（NILLKIN）"  href="9987-830-866-13302-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">耐尔金（NILLKIN）</a></div><div style="display: block;"brand="less" rel="s" id="brand_id_ 49144"><a title="SPIGEN"  href="9987-830-866-49144-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">SPIGEN</a></div><div style="display: block;"brand="less" rel="b" id="brand_id_ 36382"><a title="宾丽（binli）"  href="9987-830-866-36382-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">宾丽（binli）</a></div><div style="display: block;"brand="less" rel="e" id="brand_id_ 742"><a title="ESR"  href="9987-830-866-742-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">ESR</a></div><div style="display: block;"brand="less" rel="q" id="brand_id_ 21534"><a title="奇克摩克"  href="9987-830-866-21534-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">奇克摩克</a></div><div style="display: block;"brand="less" rel="x" id="brand_id_ 36419"><a title="西马龙（ximalong）"  href="9987-830-866-36419-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">西马龙（ximalong）</a></div><div style="display: block;"brand="less" rel="l" id="brand_id_ 11867"><a title="洛克（ROCK）"  href="9987-830-866-11867-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">洛克（ROCK）</a></div><div style="display: block;"brand="less" rel="f" id="brand_id_ 6749"><a title="Freeson"  href="9987-830-866-6749-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">Freeson</a></div><div style="display: block;"brand="less" rel="i" id="brand_id_ 1152"><a title="ideaSkin"  href="9987-830-866-1152-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">ideaSkin</a></div><div style="display: block;"brand="less" rel="x" id="brand_id_ 36418"><a title="星凯越（xkaye）"  href="9987-830-866-36418-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">星凯越（xkaye）</a></div><div style="display: block;"brand="less" rel="a" id="brand_id_ 3082"><a title="IMAK"  href="9987-830-866-3082-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">IMAK</a></div><div style="display: block;"brand="less" rel="d" id="brand_id_ 36947"><a title="丁奇（dickics）"  href="9987-830-866-36947-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">丁奇（dickics）</a></div><div style="display: block;"brand="less" rel="p" id="brand_id_ 36378"><a title="派滋（PZOZ）"  href="9987-830-866-36378-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">派滋（PZOZ）</a></div><div style="display: block;"brand="less" rel="e" id="brand_id_ 738"><a title="ESK"  href="9987-830-866-738-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">ESK</a></div><div style="display: block;"brand="less" rel="w" id="brand_id_ 26645"><a title="维肯（Viken）"  href="9987-830-866-26645-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">维肯（Viken）</a></div><div  style="display: none;"brand="more" rel="r" id="brand_id_ 14906"><a title="睿量（REMAX）"  href="9987-830-866-14906-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">睿量（REMAX）</a></div><div  style="display: none;"brand="more" rel="a" id="brand_id_ 48139"><a title="艾美诺（Imeinuo）"  href="9987-830-866-48139-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">艾美诺（Imeinuo）</a></div><div  style="display: none;"brand="more" rel="f" id="brand_id_ 48322"><a title="法芘兔（fabitoo）"  href="9987-830-866-48322-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">法芘兔（fabitoo）</a></div><div  style="display: none;"brand="more" rel="l" id="brand_id_ 26742"><a title="朗客"  href="9987-830-866-26742-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">朗客</a></div><div  style="display: none;"brand="more" rel="h" id="brand_id_ 57097"><a title="韩格（HANGE）"  href="9987-830-866-57097-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">韩格（HANGE）</a></div><div  style="display: none;"brand="more" rel="b" id="brand_id_ 4727"><a title="倍思（BASEUS）"  href="9987-830-866-4727-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">倍思（BASEUS）</a></div><div  style="display: none;"brand="more" rel="t" id="brand_id_ 24761"><a title="Totu"  href="9987-830-866-24761-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">Totu</a></div><div  style="display: none;"brand="more" rel="z" id="brand_id_ 24751"><a title="Zenus"  href="9987-830-866-24751-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">Zenus</a></div><div  style="display: none;"brand="more" rel="a" id="brand_id_ 50248"><a title="埃菲凡（IFUAUF）"  href="9987-830-866-50248-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">埃菲凡（IFUAUF）</a></div><div  style="display: none;"brand="more" rel="k" id="brand_id_ 10640"><a title="酷派（Coolpad）"  href="9987-830-866-10640-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">酷派（Coolpad）</a></div><div  style="display: none;"brand="more" rel="k" id="brand_id_ 46296"><a title="空气壳（KONGQIKE）"  href="9987-830-866-46296-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">空气壳（KONGQIKE）</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 39970"><a title="蒙奇奇"  href="9987-830-866-39970-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">蒙奇奇</a></div><div  style="display: none;"brand="more" rel="j" id="brand_id_ 45925"><a title="鲸拓（kindtoy）"  href="9987-830-866-45925-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">鲸拓（kindtoy）</a></div><div  style="display: none;"brand="more" rel="i" id="brand_id_ 1217"><a title="iSido"  href="9987-830-866-1217-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">iSido</a></div><div  style="display: none;"brand="more" rel="i" id="brand_id_ 36399"><a title="iWosty （iWosty）"  href="9987-830-866-36399-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">iWosty （iWosty）</a></div><div  style="display: none;"brand="more" rel="z" id="brand_id_ 47600"><a title="ZCGYLP"  href="9987-830-866-47600-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">ZCGYLP</a></div><div  style="display: none;"brand="more" rel="l" id="brand_id_ 47728"><a title="六讯"  href="9987-830-866-47728-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">六讯</a></div><div  style="display: none;"brand="more" rel="c" id="brand_id_ 52872"><a title="纯彩（purecolor）"  href="9987-830-866-52872-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">纯彩（purecolor）</a></div><div  style="display: none;"brand="more" rel="g" id="brand_id_ 52880"><a title="GKK"  href="9987-830-866-52880-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">GKK</a></div><div  style="display: none;"brand="more" rel="q" id="brand_id_ 46625"><a title="洽利（QIALI）"  href="9987-830-866-46625-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">洽利（QIALI）</a></div><div  style="display: none;"brand="more" rel="g" id="brand_id_ 48398"><a title="果时代（Goestime）"  href="9987-830-866-48398-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">果时代（Goestime）</a></div><div  style="display: none;"brand="more" rel="y" id="brand_id_ 36385"><a title="意达欧（yidaou）"  href="9987-830-866-36385-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">意达欧（yidaou）</a></div><div  style="display: none;"brand="more" rel="h" id="brand_id_ 47406"><a title="卉卉美美（HHMM）"  href="9987-830-866-47406-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">卉卉美美（HHMM）</a></div><div  style="display: none;"brand="more" rel="l" id="brand_id_ 36405"><a title="乐天游（Lotiyo）"  href="9987-830-866-36405-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">乐天游（Lotiyo）</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 56059"><a title="美锋"  href="9987-830-866-56059-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">美锋</a></div><div  style="display: none;"brand="more" rel="k" id="brand_id_ 9953"><a title="卡登仕（CAPDASE）"  href="9987-830-866-9953-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">卡登仕（CAPDASE）</a></div><div  style="display: none;"brand="more" rel="i" id="brand_id_ 26923"><a title="ieco"  href="9987-830-866-26923-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">ieco</a></div><div  style="display: none;"brand="more" rel="g" id="brand_id_ 21371"><a title="古古美美（GGMM）"  href="9987-830-866-21371-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">古古美美（GGMM）</a></div><div  style="display: none;"brand="more" rel="y" id="brand_id_ 36894"><a title="友为（uwei）"  href="9987-830-866-36894-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">友为（uwei）</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 13056"><a title="摩米士（MOMAX）"  href="9987-830-866-13056-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">摩米士（MOMAX）</a></div><div  style="display: none;"brand="more" rel="d" id="brand_id_ 26062"><a title="DEVIA"  href="9987-830-866-26062-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">DEVIA</a></div><div  style="display: none;"brand="more" rel="h" id="brand_id_ 52920"><a title="华浪（huawave）"  href="9987-830-866-52920-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">华浪（huawave）</a></div><div  style="display: none;"brand="more" rel="w" id="brand_id_ 53922"><a title="wisebrave"  href="9987-830-866-53922-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">wisebrave</a></div><div  style="display: none;"brand="more" rel="d" id="brand_id_ 55695"><a title="豆壳"  href="9987-830-866-55695-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">豆壳</a></div><div  style="display: none;"brand="more" rel="x" id="brand_id_ 48102"><a title="小欣工坊"  href="9987-830-866-48102-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">小欣工坊</a></div><div  style="display: none;"brand="more" rel="h" id="brand_id_ 51266"><a title="红创"  href="9987-830-866-51266-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">红创</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 47244"><a title="MATE"  href="9987-830-866-47244-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">MATE</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 46694"><a title="美趋（EMARCHER）"  href="9987-830-866-46694-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">美趋（EMARCHER）</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 51503"><a title="莫哥斯（MAGUS）"  href="9987-830-866-51503-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">莫哥斯（MAGUS）</a></div><div  style="display: none;"brand="more" rel="a" id="brand_id_ 44568"><a title="Air jacket"  href="9987-830-866-44568-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">Air jacket</a></div><div  style="display: none;"brand="more" rel="p" id="brand_id_ 59548"><a title="品怡"  href="9987-830-866-59548-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">品怡</a></div><div  style="display: none;"brand="more" rel="b" id="brand_id_ 306"><a title="BIAZE"  href="9987-830-866-306-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">BIAZE</a></div><div  style="display: none;"brand="more" rel="a" id="brand_id_ 50840"><a title="艾思迈（i-smile）"  href="9987-830-866-50840-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">艾思迈（i-smile）</a></div><div  style="display: none;"brand="more" rel="n" id="brand_id_ 56471"><a title="New Yi"  href="9987-830-866-56471-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">New Yi</a></div><div  style="display: none;"brand="more" rel="a" id="brand_id_ 49051"><a title="爱探客"  href="9987-830-866-49051-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">爱探客</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 47088"><a title="摩森"  href="9987-830-866-47088-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">摩森</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 50838"><a title="more-thing"  href="9987-830-866-50838-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">more-thing</a></div><div  style="display: none;"brand="more" rel="e" id="brand_id_ 46880"><a title="ELAGO"  href="9987-830-866-46880-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">ELAGO</a></div><div  style="display: none;"brand="more" rel="h" id="brand_id_ 8284"><a title="弘毅（HOUNY）"  href="9987-830-866-8284-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">弘毅（HOUNY）</a></div><div  style="display: none;"brand="more" rel="s" id="brand_id_ 2337"><a title="SGP"  href="9987-830-866-2337-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">SGP</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 59492"><a title="Matcheasy"  href="9987-830-866-59492-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">Matcheasy</a></div><div  style="display: none;"brand="more" rel="j" id="brand_id_ 53832"><a title="乔伊斯（JOICE）"  href="9987-830-866-53832-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">乔伊斯（JOICE）</a></div><div  style="display: none;"brand="more" rel="j" id="brand_id_ 36387"><a title="金飞迅（JFX）"  href="9987-830-866-36387-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">金飞迅（JFX）</a></div><div  style="display: none;"brand="more" rel="c" id="brand_id_ 59142"><a title="创酷（CNankcu）"  href="9987-830-866-59142-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">创酷（CNankcu）</a></div><div  style="display: none;"brand="more" rel="e" id="brand_id_ 52548"><a title="EYESTAR"  href="9987-830-866-52548-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">EYESTAR</a></div><div  style="display: none;"brand="more" rel="w" id="brand_id_ 17771"><a title="VOUNI"  href="9987-830-866-17771-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">VOUNI</a></div><div  style="display: none;"brand="more" rel="h" id="brand_id_ 36380"><a title="浩酷（HOCO）"  href="9987-830-866-36380-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">浩酷（HOCO）</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 12965"><a title="名人（WIT）"  href="9987-830-866-12965-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">名人（WIT）</a></div><div  style="display: none;"brand="more" rel="t" id="brand_id_ 56591"><a title="淘米小子"  href="9987-830-866-56591-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">淘米小子</a></div><div  style="display: none;"brand="more" rel="t" id="brand_id_ 2505"><a title="TCL"  href="9987-830-866-2505-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">TCL</a></div><div  style="display: none;"brand="more" rel="w" id="brand_id_ 55303"><a title="蛙酷"  href="9987-830-866-55303-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">蛙酷</a></div><div  style="display: none;"brand="more" rel="h" id="brand_id_ 55287"><a title="禾薇（HeeWee）"  href="9987-830-866-55287-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">禾薇（HeeWee）</a></div><div  style="display: none;"brand="more" rel="g" id="brand_id_ 50246"><a title="果立方（casecube）"  href="9987-830-866-50246-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">果立方（casecube）</a></div><div  style="display: none;"brand="more" rel="s" id="brand_id_ 2369"><a title="SkinAT"  href="9987-830-866-2369-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">SkinAT</a></div><div  style="display: none;"brand="more" rel="x" id="brand_id_ 18385"><a title="小破孩"  href="9987-830-866-18385-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">小破孩</a></div><div  style="display: none;"brand="more" rel="l" id="brand_id_ 11515"><a title="联想"  href="9987-830-866-11515-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">联想</a></div><div  style="display: none;"brand="more" rel="x" id="brand_id_ 37286"><a title="新迪尔（DER）"  href="9987-830-866-37286-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">新迪尔（DER）</a></div><div  style="display: none;"brand="more" rel="d" id="brand_id_ 5918"><a title="道瑞（x-doria）"  href="9987-830-866-5918-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">道瑞（x-doria）</a></div><div  style="display: none;"brand="more" rel="q" id="brand_id_ 14507"><a title="轻松熊（Rilakkuma）"  href="9987-830-866-14507-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">轻松熊（Rilakkuma）</a></div><div  style="display: none;"brand="more" rel="c" id="brand_id_ 10409"><a title="COMMA"  href="9987-830-866-10409-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">COMMA</a></div><div  style="display: none;"brand="more" rel="k" id="brand_id_ 45923"><a title="康派（konpad）"  href="9987-830-866-45923-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">康派（konpad）</a></div><div  style="display: none;"brand="more" rel="c" id="brand_id_ 37442"><a title="CR"  href="9987-830-866-37442-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">CR</a></div><div  style="display: none;"brand="more" rel="y" id="brand_id_ 57098"><a title="YJING"  href="9987-830-866-57098-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">YJING</a></div><div  style="display: none;"brand="more" rel="n" id="brand_id_ 45918"><a title="诺酷（NUOKU）"  href="9987-830-866-45918-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">诺酷（NUOKU）</a></div><div  style="display: none;"brand="more" rel="w" id="brand_id_ 59383"><a title="沃配（wopei）"  href="9987-830-866-59383-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">沃配（wopei）</a></div><div  style="display: none;"brand="more" rel="d" id="brand_id_ 36852"><a title="d-park"  href="9987-830-866-36852-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">d-park</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 47017"><a title="MOMOCA"  href="9987-830-866-47017-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">MOMOCA</a></div><div  style="display: none;"brand="more" rel="z" id="brand_id_ 45920"><a title="zoyu"  href="9987-830-866-45920-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">zoyu</a></div><div  style="display: none;"brand="more" rel="g" id="brand_id_ 47087"><a title="冠熙（Gxi）"  href="9987-830-866-47087-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">冠熙（Gxi）</a></div><div  style="display: none;"brand="more" rel="x" id="brand_id_ 47653"><a title="兮兮美美（XXMM）"  href="9987-830-866-47653-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">兮兮美美（XXMM）</a></div><div  style="display: none;"brand="more" rel="d" id="brand_id_ 6495"><a title="哆啦狗（GOLLA）"  href="9987-830-866-6495-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">哆啦狗（GOLLA）</a></div><div  style="display: none;"brand="more" rel="c" id="brand_id_ 44073"><a title="传导"  href="9987-830-866-44073-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">传导</a></div><div  style="display: none;"brand="more" rel="k" id="brand_id_ 46615"><a title="k-ok"  href="9987-830-866-46615-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">k-ok</a></div><div  style="display: none;"brand="more" rel="y" id="brand_id_ 55283"><a title="优凯仕（U-CASE）"  href="9987-830-866-55283-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">优凯仕（U-CASE）</a></div><div  style="display: none;"brand="more" rel="x" id="brand_id_ 37262"><a title="星期八（8thdays）"  href="9987-830-866-37262-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">星期八（8thdays）</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 53350"><a title="MEIFENG"  href="9987-830-866-53350-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">MEIFENG</a></div><div  style="display: none;"brand="more" rel="d" id="brand_id_ 51617"><a title="DE Life"  href="9987-830-866-51617-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">DE Life</a></div><div  style="display: none;"brand="more" rel="s" id="brand_id_ 53192"><a title="闪魔"  href="9987-830-866-53192-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">闪魔</a></div><div  style="display: none;"brand="more" rel="y" id="brand_id_ 47335"><a title="伊莫图（emotal）"  href="9987-830-866-47335-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">伊莫图（emotal）</a></div><div  style="display: none;"brand="more" rel="w" id="brand_id_ 44567"><a title="威马仕（WELMAX）"  href="9987-830-866-44567-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">威马仕（WELMAX）</a></div><div  style="display: none;"brand="more" rel="a" id="brand_id_ 54041"><a title="apphome"  href="9987-830-866-54041-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">apphome</a></div><div  style="display: none;"brand="more" rel="b" id="brand_id_ 55366"><a title="奔维斯（BENWIS）"  href="9987-830-866-55366-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">奔维斯（BENWIS）</a></div><div  style="display: none;"brand="more" rel="s" id="brand_id_ 47243"><a title="SLIMPACK"  href="9987-830-866-47243-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">SLIMPACK</a></div><div  style="display: none;"brand="more" rel="j" id="brand_id_ 27418"><a title="吉玛仕（GearMax）"  href="9987-830-866-27418-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">吉玛仕（GearMax）</a></div><div  style="display: none;"brand="more" rel="i" id="brand_id_ 50223"><a title="ipush"  href="9987-830-866-50223-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">ipush</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 51487"><a title="morething"  href="9987-830-866-51487-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">morething</a></div><div  style="display: none;"brand="more" rel="j" id="brand_id_ 48937"><a title="机乐堂（JOYROOM）"  href="9987-830-866-48937-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">机乐堂（JOYROOM）</a></div><div  style="display: none;"brand="more" rel="k" id="brand_id_ 30551"><a title="KK"  href="9987-830-866-30551-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">KK</a></div><div  style="display: none;"brand="more" rel="h" id="brand_id_ 7757"><a title="哈密瓜（hamimelon）"  href="9987-830-866-7757-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">哈密瓜（hamimelon）</a></div><div  style="display: none;"brand="more" rel="b" id="brand_id_ 56194"><a title="邦卡登（bankaden）"  href="9987-830-866-56194-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">邦卡登（bankaden）</a></div><div  style="display: none;"brand="more" rel="j" id="brand_id_ 8920"><a title="加菲猫（Garfield）"  href="9987-830-866-8920-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">加菲猫（Garfield）</a></div><div  style="display: none;"brand="more" rel="t" id="brand_id_ 48625"><a title="Tridea"  href="9987-830-866-48625-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">Tridea</a></div><div  style="display: none;"brand="more" rel="k" id="brand_id_ 50605"><a title="KLOGI"  href="9987-830-866-50605-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">KLOGI</a></div><div  style="display: none;"brand="more" rel="c" id="brand_id_ 49509"><a title="CASMELY"  href="9987-830-866-49509-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">CASMELY</a></div><div  style="display: none;"brand="more" rel="a" id="brand_id_ 3412"><a title="爱沃可（iWALK）"  href="9987-830-866-3412-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">爱沃可（iWALK）</a></div><div  style="display: none;"brand="more" rel="h" id="brand_id_ 50079"><a title="HOLILA"  href="9987-830-866-50079-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">HOLILA</a></div><div  style="display: none;"brand="more" rel="g" id="brand_id_ 52785"><a title="GDOO"  href="9987-830-866-52785-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">GDOO</a></div><div  style="display: none;"brand="more" rel="j" id="brand_id_ 58431"><a title="健林仕（JILIS）"  href="9987-830-866-58431-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">健林仕（JILIS）</a></div><div  style="display: none;"brand="more" rel="b" id="brand_id_ 21330"><a title="白雀"  href="9987-830-866-21330-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">白雀</a></div><div  style="display: none;"brand="more" rel="h" id="brand_id_ 36948"><a title="宏硕伟（HSW）"  href="9987-830-866-36948-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">宏硕伟（HSW）</a></div><div  style="display: none;"brand="more" rel="y" id="brand_id_ 20306"><a title="羽博（Yoobao）"  href="9987-830-866-20306-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">羽博（Yoobao）</a></div><div  style="display: none;"brand="more" rel="o" id="brand_id_ 49675"><a title="欧米可（oumike）"  href="9987-830-866-49675-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">欧米可（oumike）</a></div><div  style="display: none;"brand="more" rel="s" id="brand_id_ 16328"><a title="SEEDOO"  href="9987-830-866-16328-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">SEEDOO</a></div><div  style="display: none;"brand="more" rel="g" id="brand_id_ 53069"><a title="guzel"  href="9987-830-866-53069-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">guzel</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 51544"><a title="美优特"  href="9987-830-866-51544-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">美优特</a></div><div  style="display: none;"brand="more" rel="g" id="brand_id_ 49781"><a title="古尚古（GUSGU）"  href="9987-830-866-49781-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">古尚古（GUSGU）</a></div><div  style="display: none;"brand="more" rel="w" id="brand_id_ 57428"><a title="王牌貂（TRUMPMARTEN）"  href="9987-830-866-57428-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">王牌貂（TRUMPMARTEN）</a></div><div  style="display: none;"brand="more" rel="s" id="brand_id_ 36925"><a title="思佩克（Speck）"  href="9987-830-866-36925-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">思佩克（Speck）</a></div><div  style="display: none;"brand="more" rel="o" id="brand_id_ 27419"><a title="Otterbox"  href="9987-830-866-27419-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">Otterbox</a></div><div  style="display: none;"brand="more" rel="y" id="brand_id_ 20119"><a title="优胜仕（USAMS）"  href="9987-830-866-20119-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">优胜仕（USAMS）</a></div><div  style="display: none;"brand="more" rel="a" id="brand_id_ 55368"><a title="艾铭（iMeaning）"  href="9987-830-866-55368-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">艾铭（iMeaning）</a></div><div  style="display: none;"brand="more" rel="l" id="brand_id_ 11853"><a title="萝莉（LOLI）"  href="9987-830-866-11853-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">萝莉（LOLI）</a></div><div  style="display: none;"brand="more" rel="d" id="brand_id_ 629"><a title="DQ"  href="9987-830-866-629-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">DQ</a></div><div  style="display: none;"brand="more" rel="i" id="brand_id_ 22318"><a title="爱用"  href="9987-830-866-22318-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">爱用</a></div><div  style="display: none;"brand="more" rel="l" id="brand_id_ 36411"><a title="蓝色列车（Blue Train）"  href="9987-830-866-36411-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">蓝色列车（Blue Train）</a></div><div  style="display: none;"brand="more" rel="c" id="brand_id_ 51281"><a title="candies"  href="9987-830-866-51281-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">candies</a></div><div  style="display: none;"brand="more" rel="y" id="brand_id_ 48785"><a title="永橙（GARMMA）"  href="9987-830-866-48785-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">永橙（GARMMA）</a></div><div  style="display: none;"brand="more" rel="y" id="brand_id_ 57775"><a title="依斯卡"  href="9987-830-866-57775-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">依斯卡</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 54040"><a title="mobc"  href="9987-830-866-54040-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">mobc</a></div><div  style="display: none;"brand="more" rel="d" id="brand_id_ 61936"><a title="douke"  href="9987-830-866-61936-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">douke</a></div><div  style="display: none;"brand="more" rel="x" id="brand_id_ 18362"><a title="小辣椒"  href="9987-830-866-18362-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">小辣椒</a></div><div  style="display: none;"brand="more" rel="k" id="brand_id_ 26741"><a title="酷卡仕"  href="9987-830-866-26741-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">酷卡仕</a></div><div  style="display: none;"brand="more" rel="g" id="brand_id_ 52881"><a title="高瑟（Gusoll）"  href="9987-830-866-52881-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">高瑟（Gusoll）</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 60503"><a title="米贝（MerryBox）"  href="9987-830-866-60503-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">米贝（MerryBox）</a></div><div  style="display: none;"brand="more" rel="l" id="brand_id_ 59503"><a title="LifeProof"  href="9987-830-866-59503-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">LifeProof</a></div><div  style="display: none;"brand="more" rel="s" id="brand_id_ 47972"><a title="seenDa"  href="9987-830-866-47972-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">seenDa</a></div><div  style="display: none;"brand="more" rel="j" id="brand_id_ 9218"><a title="杰美特（JAPOD）"  href="9987-830-866-9218-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">杰美特（JAPOD）</a></div><div  style="display: none;"brand="more" rel="x" id="brand_id_ 48481"><a title="雪奈儿"  href="9987-830-866-48481-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">雪奈儿</a></div><div  style="display: none;"brand="more" rel="l" id="brand_id_ 48640"><a title="lim's"  href="9987-830-866-48640-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">lim's</a></div><div  style="display: none;"brand="more" rel="u" id="brand_id_ 57095"><a title="UKA"  href="9987-830-866-57095-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">UKA</a></div><div  style="display: none;"brand="more" rel="p" id="brand_id_ 14006"><a title="品胜（PISEN）"  href="9987-830-866-14006-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">品胜（PISEN）</a></div><div  style="display: none;"brand="more" rel="y" id="brand_id_ 52074"><a title="优美酷（UMKU）"  href="9987-830-866-52074-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">优美酷（UMKU）</a></div><div  style="display: none;"brand="more" rel="a" id="brand_id_ 48584"><a title="爱酷多（ikodoo）"  href="9987-830-866-48584-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">爱酷多（ikodoo）</a></div><div  style="display: none;"brand="more" rel="u" id="brand_id_ 54981"><a title="UNMAME"  href="9987-830-866-54981-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">UNMAME</a></div><div  style="display: none;"brand="more" rel="y" id="brand_id_ 59151"><a title="莜茉（YOMO）"  href="9987-830-866-59151-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">莜茉（YOMO）</a></div><div  style="display: none;"brand="more" rel="f" id="brand_id_ 51998"><a title="FANSPDA"  href="9987-830-866-51998-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">FANSPDA</a></div><div  style="display: none;"brand="more" rel="l" id="brand_id_ 58893"><a title="labato"  href="9987-830-866-58893-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">labato</a></div><div  style="display: none;"brand="more" rel="z" id="brand_id_ 49105"><a title="智沃（Zhiwo)"  href="9987-830-866-49105-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">智沃（Zhiwo)</a></div><div  style="display: none;"brand="more" rel="k" id="brand_id_ 10623"><a title="酷道（Miroad）"  href="9987-830-866-10623-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">酷道（Miroad）</a></div><div  style="display: none;"brand="more" rel="b" id="brand_id_ 55070"><a title="宾果（BINGO）"  href="9987-830-866-55070-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">宾果（BINGO）</a></div><div  style="display: none;"brand="more" rel="g" id="brand_id_ 53512"><a title="GOMO"  href="9987-830-866-53512-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">GOMO</a></div><div  style="display: none;"brand="more" rel="h" id="brand_id_ 50790"><a title="海路通（ARUN）"  href="9987-830-866-50790-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">海路通（ARUN）</a></div><div  style="display: none;"brand="more" rel="w" id="brand_id_ 46614"><a title="未知素（vziso）"  href="9987-830-866-46614-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">未知素（vziso）</a></div><div  style="display: none;"brand="more" rel="a" id="brand_id_ 47932"><a title="ANYFUN"  href="9987-830-866-47932-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">ANYFUN</a></div><div  style="display: none;"brand="more" rel="b" id="brand_id_ 56502"><a title="贝尚（BESON）"  href="9987-830-866-56502-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">贝尚（BESON）</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 58897"><a title="mailele"  href="9987-830-866-58897-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">mailele</a></div><div  style="display: none;"brand="more" rel="l" id="brand_id_ 38544"><a title="LAVANDA"  href="9987-830-866-38544-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">LAVANDA</a></div><div  style="display: none;"brand="more" rel="s" id="brand_id_ 53522"><a title="神龙达（SLODA）"  href="9987-830-866-53522-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">神龙达（SLODA）</a></div><div  style="display: none;"brand="more" rel="s" id="brand_id_ 52807"><a title="S.GP"  href="9987-830-866-52807-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">S.GP</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 59489"><a title="莫克（mooke）"  href="9987-830-866-59489-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">莫克（mooke）</a></div><div  style="display: none;"brand="more" rel="v" id="brand_id_ 48624"><a title="voia"  href="9987-830-866-48624-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">voia</a></div><div  style="display: none;"brand="more" rel="t" id="brand_id_ 2598"><a title="TTAF"  href="9987-830-866-2598-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">TTAF</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 23528"><a title="麦奇思"  href="9987-830-866-23528-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">麦奇思</a></div><div  style="display: none;"brand="more" rel="a" id="brand_id_ 56592"><a title="Aobntech"  href="9987-830-866-56592-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">Aobntech</a></div><div  style="display: none;"brand="more" rel="a" id="brand_id_ 37918"><a title="艾克司（Acase）"  href="9987-830-866-37918-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">艾克司（Acase）</a></div><div  style="display: none;"brand="more" rel="g" id="brand_id_ 60038"><a title="G-DOO"  href="9987-830-866-60038-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">G-DOO</a></div><div  style="display: none;"brand="more" rel="l" id="brand_id_ 39303"><a title="洛夫特（LOFTER）"  href="9987-830-866-39303-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">洛夫特（LOFTER）</a></div><div  style="display: none;"brand="more" rel="a" id="brand_id_ 24551"><a title="艾克玛斯（X-MAX）"  href="9987-830-866-24551-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">艾克玛斯（X-MAX）</a></div><div  style="display: none;"brand="more" rel="b" id="brand_id_ 46591"><a title="邦派（bangpai）"  href="9987-830-866-46591-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">邦派（bangpai）</a></div><div  style="display: none;"brand="more" rel="l" id="brand_id_ 21866"><a title="乐泡"  href="9987-830-866-21866-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">乐泡</a></div><div  style="display: none;"brand="more" rel="x" id="brand_id_ 25685"><a title="炫克"  href="9987-830-866-25685-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">炫克</a></div><div  style="display: none;"brand="more" rel="g" id="brand_id_ 54422"><a title="歌特斯"  href="9987-830-866-54422-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">歌特斯</a></div><div  style="display: none;"brand="more" rel="a" id="brand_id_ 57199"><a title="艾乐微（ilavie）"  href="9987-830-866-57199-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">艾乐微（ilavie）</a></div><div  style="display: none;"brand="more" rel="g" id="brand_id_ 36376"><a title="咕嘟仕（GUDUSHI）"  href="9987-830-866-36376-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">咕嘟仕（GUDUSHI）</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 47397"><a title="魔力泡（molipow）"  href="9987-830-866-47397-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">魔力泡（molipow）</a></div><div  style="display: none;"brand="more" rel="a" id="brand_id_ 38300"><a title="艾米（iMMi）"  href="9987-830-866-38300-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">艾米（iMMi）</a></div><div  style="display: none;"brand="more" rel="y" id="brand_id_ 53193"><a title="扬新（YAS）"  href="9987-830-866-53193-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">扬新（YAS）</a></div><div  style="display: none;"brand="more" rel="s" id="brand_id_ 46647"><a title="Skyunion"  href="9987-830-866-46647-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">Skyunion</a></div><div  style="display: none;"brand="more" rel="x" id="brand_id_ 52671"><a title="讯迪（Xundd）"  href="9987-830-866-52671-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">讯迪（Xundd）</a></div><div  style="display: none;"brand="more" rel="z" id="brand_id_ 49904"><a title="子晨（zichen）"  href="9987-830-866-49904-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">子晨（zichen）</a></div><div  style="display: none;"brand="more" rel="c" id="brand_id_ 54984"><a title="CHENGYU"  href="9987-830-866-54984-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">CHENGYU</a></div><div  style="display: none;"brand="more" rel="z" id="brand_id_ 39254"><a title="中超"  href="9987-830-866-39254-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">中超</a></div><div  style="display: none;"brand="more" rel="h" id="brand_id_ 43726"><a title="Hama"  href="9987-830-866-43726-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">Hama</a></div><div  style="display: none;"brand="more" rel="m" id="brand_id_ 58390"><a title="莫瑞（MOROCK）"  href="9987-830-866-58390-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">莫瑞（MOROCK）</a></div><div  style="display: none;"brand="more" rel="k" id="brand_id_ 10232"><a title="凯思智品（Caselogic）"  href="9987-830-866-10232-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">凯思智品（Caselogic）</a></div><div  style="display: none;"brand="more" rel="q" id="brand_id_ 27145"><a title="奇异鸟（kiwibird）"  href="9987-830-866-27145-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">奇异鸟（kiwibird）</a></div><div  style="display: none;"brand="more" rel="g" id="brand_id_ 47404"><a title="Guoguo"  href="9987-830-866-47404-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">Guoguo</a></div><div  style="display: none;"brand="more" rel="a" id="brand_id_ 55188"><a title="aurora power"  href="9987-830-866-55188-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">aurora power</a></div><div  style="display: none;"brand="more" rel="x" id="brand_id_ 18374"><a title="小米（MI）"  href="9987-830-866-18374-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">小米（MI）</a></div><div  style="display: none;"brand="more" rel="q" id="brand_id_ 14151"><a title="其它"  href="9987-830-866-14151-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html">其它</a></div></div></div></div></div></div><div class='prop-attrs ' ><div class='attr'><div class='a-key'>适用于：</div><div class='a-values'><div class='v-fold'><ul class='f-list'><li><a href='9987-830-866-0-109776-14984-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>苹果手机</a></li><li><a href='9987-830-866-0-109776-14981-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>三星手机</a></li><li><a href='9987-830-866-0-109776-14980-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>诺基亚手机</a></li><li><a href='9987-830-866-0-109776-14988-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>HTC手机</a></li><li><a href='9987-830-866-0-109776-14982-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>摩托罗拉手机</a></li><li><a href='9987-830-866-0-109776-113715-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>索尼手机</a></li><li><a href='9987-830-866-0-109776-14983-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>索爱手机</a></li><li><a href='9987-830-866-0-109776-14985-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>黑莓手机</a></li><li><a href='9987-830-866-0-109776-14986-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>魅族手机</a></li><li><a href='9987-830-866-0-109776-14987-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>LG手机</a></li><li><a href='9987-830-866-0-109776-115923-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>小米手机</a></li><li><a href='9987-830-866-0-109776-101835-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>华为手机</a></li><li><a href='9987-830-866-0-109776-56308-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>联想手机</a></li><li><a href='9987-830-866-0-109776-101834-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>中兴手机</a></li><li><a href='9987-830-866-0-109776-64827-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>酷派手机</a></li><li><a href='9987-830-866-0-109776-138974-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>OPPO手机</a></li><li><a href='9987-830-866-0-109776-339313-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>夏新手机</a></li><li><a href='9987-830-866-0-109776-80385-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>海信手机</a></li><li><a href='9987-830-866-0-109776-80384-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>其它</a></li><li><a href='9987-830-866-0-109776-54157-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>通用</a></li></ul></div><div class='v-option hide' option='more' onclick='moreExpandValue(this);'><span class='o-more unfold'><b></b>更多</span></div><div class='v-option hide' onclick='lessExpandValue(this);'><span class='o-more fold'><b></b>收起</span></div></div></div></div><div class='prop-attrs ' ><div class='attr'><div class='a-key'>价格：</div><div class='a-values'><div class='v-fold'><ul class='f-list'><li><a href='9987-830-866-0-109776-4643-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>1-59元</a></li><li><a href='9987-830-866-0-109776-4575-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>60-99元</a></li><li><a href='9987-830-866-0-109776-4578-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>100-149元</a></li><li><a href='9987-830-866-0-109776-339287-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>150-199元</a></li><li><a href='9987-830-866-0-109776-339288-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>200-299元</a></li><li><a href='9987-830-866-0-109776-4580-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>300元以上</a></li></ul></div><div class='v-option hide' option='more' onclick='moreExpandValue(this);'><span class='o-more unfold'><b></b>更多</span></div><div class='v-option hide' onclick='lessExpandValue(this);'><span class='o-more fold'><b></b>收起</span></div></div></div></div><div class='prop-attrs ' ><div class='attr'><div class='a-key'>样式：</div><div class='a-values'><div class='v-fold'><ul class='f-list'><li><a href='9987-830-866-0-109776-339231-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>简约</a></li><li><a href='9987-830-866-0-109776-339233-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>商务</a></li><li><a href='9987-830-866-0-109776-339235-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>卡通动漫</a></li><li><a href='9987-830-866-0-109776-339237-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>艺术/抽象</a></li><li><a href='9987-830-866-0-109776-339238-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>小清新</a></li><li><a href='9987-830-866-0-109776-339239-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>萝莉风格</a></li><li><a href='9987-830-866-0-109776-339241-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>御姐风格</a></li><li><a href='9987-830-866-0-109776-339243-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>魅力男士</a></li><li><a href='9987-830-866-0-109776-339245-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>奢华</a></li><li><a href='9987-830-866-0-109776-339247-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>欧美风</a></li><li><a href='9987-830-866-0-109776-339249-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>日韩风</a></li><li><a href='9987-830-866-0-109776-339250-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>中国风</a></li><li><a href='9987-830-866-0-109776-339251-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>复古风</a></li><li><a href='9987-830-866-0-109776-339252-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>DIY</a></li><li><a href='9987-830-866-0-109776-339253-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>设计师产品</a></li></ul></div><div class='v-option hide' option='more' onclick='moreExpandValue(this);'><span class='o-more unfold'><b></b>更多</span></div><div class='v-option hide' onclick='lessExpandValue(this);'><span class='o-more fold'><b></b>收起</span></div></div></div></div><div class='prop-attrs ' ><div class='attr'><div class='a-key'>颜色：</div><div class='a-values'><div class='v-fold'><ul class='f-list'><li><a href='9987-830-866-0-109776-339255-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>黑色</a></li><li><a href='9987-830-866-0-109776-339257-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>白色</a></li><li><a href='9987-830-866-0-109776-339259-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>银灰</a></li><li><a href='9987-830-866-0-109776-339261-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>红色</a></li><li><a href='9987-830-866-0-109776-339263-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>橙色</a></li><li><a href='9987-830-866-0-109776-339266-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>粉色</a></li><li><a href='9987-830-866-0-109776-339268-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>黄色</a></li><li><a href='9987-830-866-0-109776-339270-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>蓝色</a></li><li><a href='9987-830-866-0-109776-339272-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>绿色</a></li><li><a href='9987-830-866-0-109776-339274-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>咖啡色</a></li><li><a href='9987-830-866-0-109776-339276-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>棕色</a></li><li><a href='9987-830-866-0-109776-339277-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>金色</a></li><li><a href='9987-830-866-0-109776-339280-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>紫色</a></li><li><a href='9987-830-866-0-109776-339282-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>图案</a></li><li><a href='9987-830-866-0-109776-339284-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>混搭颜色</a></li><li><a href='9987-830-866-0-109776-339286-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>其他</a></li></ul></div><div class='v-option hide' option='more' onclick='moreExpandValue(this);'><span class='o-more unfold'><b></b>更多</span></div><div class='v-option hide' onclick='lessExpandValue(this);'><span class='o-more fold'><b></b>收起</span></div></div></div></div></div><div id="advanced" class="mb" style="margin-bottom: 10px;"></div></div><div id='filter'  clstag='thirdtype|keycount|thirdtype|filter'>
+<div class='cls'></div><div class='fore1'>
+<dl class='order'><dt>排序：</dt>
+<dd class='curr' ><a href='9987-830-866-0-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html'>销量</a><b></b></dd>
+<dd><b></b><a href='9987-830-866-0-109776-0-0-0-0-0-1-3-1-1-13-2900-3533-0.html' rel='nofollow'>价格</a><b></b></dd>
+<dd><a href='9987-830-866-0-109776-0-0-0-0-0-1-4-1-1-13-2900-3533-0.html' rel='nofollow'>评论数</a><b></b></dd>
+<dd><a href='9987-830-866-0-109776-0-0-0-0-0-1-5-1-1-13-2900-3533-0.html' rel='nofollow'>上架时间</a><b></b></dd>
+</dl>
+<div class='pagin pagin-m'><span class='text'><i>1</i>/444</span>
+<span class="prev-disabled">上一页<b></b></span>
+<a class="next" href="9987-830-866-0-109776-0-0-0-0-0-1-1-2-1-13-2900-3533-0.html">下一页<b></b></a>
+</div>
+<div class='total'><span>共<strong>15974</strong>个商品</span></div>
+<span class='clr'></span>
+</div>
+<div class='fore2 form'>
+<dl class='store'>
+<dt>库存：</dt>
+<dd id='store-selector'>
+<div class='text'>请选择<b></b></div>
+<div class='content'>
+<div data-widget='tabs' class='m JD-stock' id='JD-stock'>
+<div class='mt'>
+<ul class='tab'>
+<li class='curr' onClick='selectStoreTab(0)' data-widget='tab-item'><a href='#none'><em>请选择</em><i></i></a></li>
+<li class='hide' onClick='selectStoreTab(1)' data-widget='tab-item' ><a href='#none'><em>请选择</em><i></i></a></li>
+<li class='hide' onClick='selectStoreTab(2)' data-widget='tab-item' ><a href='#none'><em>请选择</em><i></i></a></li>
+</ul>
+<div class='stock-line'></div>
+</div>
+<div class='mc' data-area='0' data-widget='tab-content'>
+<ul class='area-list'>
+</ul>
+</div>
+<div class='mc hide' data-area='1' data-widget='tab-content' >
+<ul class='area-list'>
+</ul>
+<p class='ac'>请选择一级地区...</p>
+</div>
+<div class='mc hide' data-area='2' data-widget='tab-content' >
+<ul class='area-list'>
+</ul>
+<p class='ac'>请选择二级地区...</p>
+</div>
+</div>
+</div>
+<div onclick="$('#store-selector').removeClass('hover')" class='close'></div>
+</dd>
+<dd class='instock'><div ><a href='9987-830-866-0-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-33.html'><b></b>仅显示有货</a></div></dd>
+</dl>
+<dl class='type'>
+<dt>商品类型：</dt>
+<dd class='selected'><a href='9987-830-866-0-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html'><b></b>全部</a></dd>
+<dd><a href='9987-830-866-0-109776-0-0-0-0-0-4-1-1-1-13-2900-3533-0.html'><b></b>京东配送</a></dd>
+<dd><a href='9987-830-866-0-109776-0-0-0-0-0-3-1-1-1-13-2900-3533-0.html'><b></b>第三方配送</a></dd>
+</dl>
+<span class='clr'></span>
+</div>
+</div>
+<div class="m plist-n7a ordinary-prebuy" id="plist" clstag="thirdtype|keycount|thirdtype|plist">
+<ul class="list-h">
+<li index='0' onclick='log(7,3,976675)' sku='976675'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/976675.html'><img width='220' height='220' alt='奇克摩克 TPU硅胶自带防尘塞手机壳/保护壳 适用于苹果iPhone5s 白色' src='http://img10.360buyimg.com/n7/g14/M09/10/15/rBEhV1I23XEIAAAAAADL6fsr824AADQWgAE6bYAAMwB749.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/976675.html'>奇克摩克 TPU硅胶自带防尘塞手机壳/保护壳 适用于苹果iPhone5s 白色<font style='color: #ff0000' class='adwords' name='976675'></font></a></div><div id='djd976675' class='p-price'><strong></strong><span id='p976675'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/976675-1-1.html'>已有18060人评价</a></span><span class='reputation'>(91%好评)</span></div><div class='stocklist' stock='976675'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,976675)' stock='976675' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=976675&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll976675' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_976675' skuid='976675'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='1' onclick='log(7,3,1061860985)' sku='1061860985'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1061860985.html'><img width='220' height='220' alt='SPIGEN 韩国 苹果Iphone 5S手机壳 5保护套 外壳 彩壳 全透明' src='http://img10.360buyimg.com/n7/g13/M08/18/1D/rBEhVFMTB4kIAAAAAAHwB6h_3agAAJVXQLYhnIAAfAf142.jpg' data-img="1"/></a><div class='picon pi7'><b></b></div></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1061860985.html'>SPIGEN 韩国 苹果Iphone 5S手机壳 5保护套 外壳 彩壳 全透明<font style='color: #ff0000' class='adwords' name='1061860985'></font></a></div><div id='djd1061860985' class='p-price'><strong></strong><span id='p1061860985'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1061860985-1-1.html'>已有1256人评价</a></span><span class='reputation'>(91%好评)</span></div><div class='stocklist' stock='1061860985'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1061860985)' stock='1061860985' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1061860985&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1061860985' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1061860985' skuid='1061860985'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='2' onclick='log(7,3,1105246640)' sku='1105246640'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1105246640.html'><img width='220' height='220' alt='宾丽 手机套 适用于三星note2手机套N7100保护套手机壳真牛皮 黑色' src='http://img10.360buyimg.com/n7/g12/M00/02/03/rBEQYFMwQEYIAAAAAAP2OogjkdIAADPEwHVo0oAA_ZS137.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1105246640.html'>宾丽 手机套 适用于三星note2手机套N7100保护套手机壳真牛皮 黑色<font style='color: #ff0000' class='adwords' name='1105246640'></font></a></div><div id='djd1105246640' class='p-price'><strong></strong><span id='p1105246640'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1105246640-1-1.html'>已有128人评价</a></span><span class='reputation'>(97%好评)</span></div><div class='stocklist' stock='1105246640'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1105246640)' stock='1105246640' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1105246640&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1105246640' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1105246640' skuid='1105246640'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='3' onclick='log(7,3,1048609059)' sku='1048609059'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1048609059.html'><img width='220' height='220' alt='SPIGEN韩国三星Galaxy note3大黄蜂保护手机壳套 保护套 适用于N9000 土豪金' src='http://img14.360buyimg.com/n7/g15/M03/11/11/rBEhWVJp7McIAAAAAAGKrOiOSREAAEj_AJ9_wQAAYrE498.jpg' data-img="1"/></a><div class='picon pi2'><b></b></div></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1048609059.html'>SPIGEN韩国三星Galaxy note3大黄蜂保护手机壳套 保护套 适用于N9000 土豪金<font style='color: #ff0000' class='adwords' name='1048609059'></font></a></div><div id='djd1048609059' class='p-price'><strong></strong><span id='p1048609059'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1048609059-1-1.html'>已有1532人评价</a></span><span class='reputation'>(94%好评)</span></div><div class='stocklist' stock='1048609059'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1048609059)' stock='1048609059' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1048609059&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1048609059' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1048609059' skuid='1048609059'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='4' onclick='log(7,3,883571)' sku='883571'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/883571.html'><img width='220' height='220' alt='奇克摩克 TPU硅胶自带防尘塞手机保护套 适用于苹果iPhone4/4s 白色' src='http://img11.360buyimg.com/n7/g12/M00/04/10/rBEQYFGMuEsIAAAAAAGi7t3sGUsAAA4ZwIDIgIAAaMG298.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/883571.html'>奇克摩克 TPU硅胶自带防尘塞手机保护套 适用于苹果iPhone4/4s 白色<font style='color: #ff0000' class='adwords' name='883571'></font></a></div><div id='djd883571' class='p-price'><strong></strong><span id='p883571'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/883571-1-1.html'>已有7108人评价</a></span><span class='reputation'>(92%好评)</span></div><div class='stocklist' stock='883571'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,883571)' stock='883571' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=883571&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll883571' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_883571' skuid='883571'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='5' onclick='log(7,3,1044428)' sku='1044428'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1044428.html'><img width='220' height='220' alt='洛克（ROCK） 极薄TPU隐形套 适用于苹果iPhone 5/5S 透明' src='http://img13.360buyimg.com/n7/g15/M04/17/06/rBEhWVNPhC4IAAAAAAGU6P29KcEAAL_DAG1f6EAAZUA677.jpg' data-img="1"/></a><div class='picon pi1'><b></b></div></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1044428.html'>洛克（ROCK） 极薄TPU隐形套 适用于苹果iPhone 5/5S 透明<font style='color: #ff0000' class='adwords' name='1044428'></font></a></div><div id='djd1044428' class='p-price'><strong></strong><span id='p1044428'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1044428-1-1.html'>已有309人评价</a></span><span class='reputation'>(90%好评)</span></div><div class='stocklist' stock='1044428'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1044428)' stock='1044428' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1044428&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1044428' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1044428' skuid='1044428'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='6' onclick='log(7,3,883568)' sku='883568'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/883568.html'><img width='220' height='220' alt='奇克摩克 TPU硅胶自带防尘塞手机保护壳 适用于苹果iPhone4/4s 灰色' src='http://img13.360buyimg.com/n7/g12/M00/04/10/rBEQYFGMuEkIAAAAAAFuluqbzL8AAA4ZwEsHOoAAW6u845.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/883568.html'>奇克摩克 TPU硅胶自带防尘塞手机保护壳 适用于苹果iPhone4/4s 灰色<font style='color: #ff0000' class='adwords' name='883568'></font></a></div><div id='djd883568' class='p-price'><strong></strong><span id='p883568'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/883568-1-1.html'>已有7107人评价</a></span><span class='reputation'>(92%好评)</span></div><div class='stocklist' stock='883568'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,883568)' stock='883568' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=883568&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll883568' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_883568' skuid='883568'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='7' onclick='log(7,3,1049013618)' sku='1049013618'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1049013618.html'><img width='220' height='220' alt='韩国SPIGEN三星Galaxy S4大黄蜂手机套保护壳 手机壳适用于i9500 i959 土豪金' src='http://img13.360buyimg.com/n7/g13/M07/13/02/rBEhUlJrasQIAAAAAAUVH9bePmQAAEnlQBxkLcABRU3128.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1049013618.html'>韩国SPIGEN三星Galaxy S4大黄蜂手机套保护壳 手机壳适用于i9500 i959 土豪金<font style='color: #ff0000' class='adwords' name='1049013618'></font></a></div><div id='djd1049013618' class='p-price'><strong></strong><span id='p1049013618'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1049013618-1-1.html'>已有1909人评价</a></span><span class='reputation'>(91%好评)</span></div><div class='stocklist' stock='1049013618'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1049013618)' stock='1049013618' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1049013618&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1049013618' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1049013618' skuid='1049013618'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='8' onclick='log(7,3,1038259853)' sku='1038259853'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1038259853.html'><img width='220' height='220' alt='Zenus韩国进口适用于三星note3保护套n9000真皮手机套铆钉配挂绳n9008 note3棕色' data-lazyload='http://img13.360buyimg.com/n7/g13/M01/0F/09/rBEhU1JTkO4IAAAAAAMLNuxzFTIAAD4aAA1eY8AAwtO703.jpg' data-img="1"/></a><div class='picon pi2'><b></b></div></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1038259853.html'>Zenus韩国进口适用于三星note3保护套n9000真皮手机套铆钉配挂绳n9008 note3棕色<font style='color: #ff0000' class='adwords' name='1038259853'></font></a></div><div id='djd1038259853' class='p-price'><strong></strong><span id='p1038259853'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1038259853-1-1.html'>已有205人评价</a></span><span class='reputation'>(93%好评)</span></div><div class='stocklist' stock='1038259853'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1038259853)' stock='1038259853' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1038259853&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1038259853' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1038259853' skuid='1038259853'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='9' onclick='log(7,3,1105246641)' sku='1105246641'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1105246641.html'><img width='220' height='220' alt='宾丽 手机套 适用于三星note2手机套N7100保护套手机壳真牛皮 棕色' data-lazyload='http://img11.360buyimg.com/n7/g13/M04/1F/16/rBEhUlMwQCIIAAAAAAS9NzYsbngAAKp0ALg8aMABL1P866.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1105246641.html'>宾丽 手机套 适用于三星note2手机套N7100保护套手机壳真牛皮 棕色<font style='color: #ff0000' class='adwords' name='1105246641'></font></a></div><div id='djd1105246641' class='p-price'><strong></strong><span id='p1105246641'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1105246641-1-1.html'>已有129人评价</a></span><span class='reputation'>(97%好评)</span></div><div class='stocklist' stock='1105246641'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1105246641)' stock='1105246641' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1105246641&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1105246641' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1105246641' skuid='1105246641'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='10' onclick='log(7,3,1090034303)' sku='1090034303'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1090034303.html'><img width='220' height='220' alt='ZCGYLP 小米2s手机壳 清水 2s保护套 小米2/超薄/白色/磨砂硅胶套' data-lazyload='http://img13.360buyimg.com/n7/g14/M00/1A/03/rBEhV1MrvyUIAAAAAAH2dA130_wAAKlwQH_4w0AAfaM313.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1090034303.html'>ZCGYLP 小米2s手机壳 清水 2s保护套 小米2/超薄/白色/磨砂硅胶套<font style='color: #ff0000' class='adwords' name='1090034303'></font></a></div><div id='djd1090034303' class='p-price'><strong></strong><span id='p1090034303'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1090034303-1-1.html'>已有482人评价</a></span><span class='reputation'>(91%好评)</span></div><div class='stocklist' stock='1090034303'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1090034303)' stock='1090034303' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1090034303&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1090034303' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1090034303' skuid='1090034303'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='11' onclick='log(7,3,1044692520)' sku='1044692520'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1044692520.html'><img width='220' height='220' alt='TOTU 苹果iphone5/5S手机壳 边框硅胶保护壳大黄蜂超薄外壳保护套 白金' data-lazyload='http://img10.360buyimg.com/n7/g13/M06/1E/0F/rBEhU1MqakEIAAAAAADusfai5noAAKargLbYIwAAO7J302.jpg' data-img="1"/></a><div class='picon pi2'><b></b></div></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1044692520.html'>TOTU 苹果iphone5/5S手机壳 边框硅胶保护壳大黄蜂超薄外壳保护套 白金<font style='color: #ff0000' class='adwords' name='1044692520'></font></a></div><div id='djd1044692520' class='p-price'><strong></strong><span id='p1044692520'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1044692520-1-1.html'>已有1513人评价</a></span><span class='reputation'>(86%好评)</span></div><div class='stocklist' stock='1044692520'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1044692520)' stock='1044692520' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1044692520&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1044692520' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1044692520' skuid='1044692520'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='12' onclick='log(7,3,1035407277)' sku='1035407277'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1035407277.html'><img width='220' height='220' alt='SPIGEN韩国三星Galaxy note3大黄蜂保护手机壳套 保护套 适用于N9000 藏青色' data-lazyload='http://img12.360buyimg.com/n7/g13/M05/10/0E/rBEhU1JbepwIAAAAAASOKF4fLIAAAEG1AKAxIcABI5A255.jpg' data-img="1"/></a><div class='picon pi2'><b></b></div></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1035407277.html'>SPIGEN韩国三星Galaxy note3大黄蜂保护手机壳套 保护套 适用于N9000 藏青色<font style='color: #ff0000' class='adwords' name='1035407277'></font></a></div><div id='djd1035407277' class='p-price'><strong></strong><span id='p1035407277'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1035407277-1-1.html'>已有1536人评价</a></span><span class='reputation'>(94%好评)</span></div><div class='stocklist' stock='1035407277'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1035407277)' stock='1035407277' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1035407277&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1035407277' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1035407277' skuid='1035407277'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='13' onclick='log(7,3,1024408203)' sku='1024408203'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1024408203.html'><img width='220' height='220' alt='韩国SPIGEN三星Galaxy S4大黄蜂手机套保护壳 手机壳适用于i9500 i959 银色' data-lazyload='http://img13.360buyimg.com/n7/g15/M09/00/17/rBEhWlG1acIIAAAAAAMxGehVjEIAAAJEQDpJYsAAzEx445.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1024408203.html'>韩国SPIGEN三星Galaxy S4大黄蜂手机套保护壳 手机壳适用于i9500 i959 银色<font style='color: #ff0000' class='adwords' name='1024408203'></font></a></div><div id='djd1024408203' class='p-price'><strong></strong><span id='p1024408203'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1024408203-1-1.html'>已有1906人评价</a></span><span class='reputation'>(91%好评)</span></div><div class='stocklist' stock='1024408203'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1024408203)' stock='1024408203' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1024408203&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1024408203' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1024408203' skuid='1024408203'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='14' onclick='log(7,3,1100919251)' sku='1100919251'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1100919251.html'><img width='220' height='220' alt='艾美诺适用于红米适用于红米双天窗皮套支撑功能保护套 手机套 手机壳 红米手机保护套 开窗雅黑色' data-lazyload='http://img11.360buyimg.com/n7/g14/M06/19/0D/rBEhVVMpBzIIAAAAAAPabMQNXY4AAKdSwAXl8YAA9qE438.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1100919251.html'>艾美诺适用于红米适用于红米双天窗皮套支撑功能保护套 手机套 手机壳 红米手机保护套 开窗雅黑色<font style='color: #ff0000' class='adwords' name='1100919251'></font></a></div><div id='djd1100919251' class='p-price'><strong></strong><span id='p1100919251'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1100919251-1-1.html'>已有230人评价</a></span><span class='reputation'>(97%好评)</span></div><div class='stocklist' stock='1100919251'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1100919251)' stock='1100919251' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1100919251&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1100919251' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1100919251' skuid='1100919251'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='15' onclick='log(7,3,1069003974)' sku='1069003974'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1069003974.html'><img width='220' height='220' alt='SPIGEN 三星S4大黄蜂手机壳 i9500手机套 I959保护套 i9502保护壳 金色' data-lazyload='http://img14.360buyimg.com/n7/g14/M0A/08/1A/rBEhVlK2m2EIAAAAAAlwJw_4dykAAHN5AAjrYoACXA_553.png' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1069003974.html'>SPIGEN 三星S4大黄蜂手机壳 i9500手机套 I959保护套 i9502保护壳 金色<font style='color: #ff0000' class='adwords' name='1069003974'></font></a></div><div id='djd1069003974' class='p-price'><strong></strong><span id='p1069003974'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1069003974-1-1.html'>已有148人评价</a></span><span class='reputation'>(97%好评)</span></div><div class='stocklist' stock='1069003974'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1069003974)' stock='1069003974' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1069003974&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1069003974' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1069003974' skuid='1069003974'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='16' onclick='log(7,3,1035407279)' sku='1035407279'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1035407279.html'><img width='220' height='220' alt='SPIGEN韩国三星Galaxy note3大黄蜂保护手机壳套 保护套 适用于N9000 银色' data-lazyload='http://img14.360buyimg.com/n7/g15/M08/0F/07/rBEhWFJbewsIAAAAAARnv3XnxQMAAEHEQKSC5oABGfX494.jpg' data-img="1"/></a><div class='picon pi2'><b></b></div></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1035407279.html'>SPIGEN韩国三星Galaxy note3大黄蜂保护手机壳套 保护套 适用于N9000 银色<font style='color: #ff0000' class='adwords' name='1035407279'></font></a></div><div id='djd1035407279' class='p-price'><strong></strong><span id='p1035407279'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1035407279-1-1.html'>已有1532人评价</a></span><span class='reputation'>(94%好评)</span></div><div class='stocklist' stock='1035407279'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1035407279)' stock='1035407279' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1035407279&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1035407279' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1035407279' skuid='1035407279'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='17' onclick='log(7,3,1097120629)' sku='1097120629'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1097120629.html'><img width='220' height='220' alt='艾美诺适用于小米2S手机套 小米2手机套 小米2S手机壳 小米2S手机保护套 2S皮套 雅黑色' data-lazyload='http://img14.360buyimg.com/n7/g13/M06/1C/1C/rBEhU1MiuAcIAAAAAAL0gqK7730AAKG4QEtiI8AAvSa212.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1097120629.html'>艾美诺适用于小米2S手机套 小米2手机套 小米2S手机壳 小米2S手机保护套 2S皮套 雅黑色<font style='color: #ff0000' class='adwords' name='1097120629'></font></a></div><div id='djd1097120629' class='p-price'><strong></strong><span id='p1097120629'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1097120629-1-1.html'>已有222人评价</a></span><span class='reputation'>(100%好评)</span></div><div class='stocklist' stock='1097120629'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1097120629)' stock='1097120629' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1097120629&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1097120629' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1097120629' skuid='1097120629'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='18' onclick='log(7,3,1096281936)' sku='1096281936'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1096281936.html'><img width='220' height='220' alt='艾美诺三星g7106手机套g7108皮套g7106手机保护套三星G7102手机壳 雅黑色' data-lazyload='http://img11.360buyimg.com/n7/g15/M07/0C/1B/rBEhWVMhNawIAAAAAAl1hsl9uBgAAJ-EQLlGYsACXWe527.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1096281936.html'>艾美诺三星g7106手机套g7108皮套g7106手机保护套三星G7102手机壳 雅黑色<font style='color: #ff0000' class='adwords' name='1096281936'></font></a></div><div id='djd1096281936' class='p-price'><strong></strong><span id='p1096281936'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1096281936-1-1.html'>已有145人评价</a></span><span class='reputation'>(100%好评)</span></div><div class='stocklist' stock='1096281936'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1096281936)' stock='1096281936' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1096281936&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1096281936' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1096281936' skuid='1096281936'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='19' onclick='log(7,3,1070850)' sku='1070850'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1070850.html'><img width='220' height='220' alt='奇克摩克 无形系列0.5mm超薄硅胶自带防尘塞手机保护套 适用于苹果 iPhone5/5S 透白色' data-lazyload='http://img10.360buyimg.com/n7/g15/M05/0C/17/rBEhWlMhCS8IAAAAAAECJ7UVyboAAJ8jgGCZjUAAQI_628.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1070850.html'>奇克摩克 无形系列0.5mm超薄硅胶自带防尘塞手机保护套 适用于苹果 iPhone5/5S 透白色<font style='color: #ff0000' class='adwords' name='1070850'></font></a></div><div id='djd1070850' class='p-price'><strong></strong><span id='p1070850'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1070850-1-1.html'>已有18046人评价</a></span><span class='reputation'>(91%好评)</span></div><div class='stocklist' stock='1070850'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1070850)' stock='1070850' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1070850&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1070850' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1070850' skuid='1070850'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='20' onclick='log(7,3,930821)' sku='930821'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/930821.html'><img width='220' height='220' alt='奇克摩克 TPU硅胶自带防尘塞手机壳保护壳 适用于苹果iPhone4/4s 紫色' data-lazyload='http://img11.360buyimg.com/n7/g13/M01/03/1D/rBEhVFH7R3sIAAAAAAGj6-PcIlMAABqOgHpZbwAAaQD480.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/930821.html'>奇克摩克 TPU硅胶自带防尘塞手机壳保护壳 适用于苹果iPhone4/4s 紫色<font style='color: #ff0000' class='adwords' name='930821'></font></a></div><div id='djd930821' class='p-price'><strong></strong><span id='p930821'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/930821-1-1.html'>已有7109人评价</a></span><span class='reputation'>(92%好评)</span></div><div class='stocklist' stock='930821'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,930821)' stock='930821' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=930821&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll930821' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_930821' skuid='930821'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='21' onclick='log(7,3,883566)' sku='883566'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/883566.html'><img width='220' height='220' alt='奇克摩克 TPU硅胶自带防尘塞手机壳保护壳 适用于苹果iPhone4/4s 蓝色' data-lazyload='http://img11.360buyimg.com/n7/g12/M00/04/10/rBEQYFGMuEYIAAAAAAGs7v7wHXcAAA4ZwCYaLoAAa0G509.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/883566.html'>奇克摩克 TPU硅胶自带防尘塞手机壳保护壳 适用于苹果iPhone4/4s 蓝色<font style='color: #ff0000' class='adwords' name='883566'></font></a></div><div id='djd883566' class='p-price'><strong></strong><span id='p883566'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/883566-1-1.html'>已有7108人评价</a></span><span class='reputation'>(92%好评)</span></div><div class='stocklist' stock='883566'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,883566)' stock='883566' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=883566&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll883566' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_883566' skuid='883566'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='22' onclick='log(7,3,1067636207)' sku='1067636207'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1067636207.html'><img width='220' height='220' alt='艾美诺三星GALAXY Note2手机套N7100/N7108手机保护皮套手机壳 note2双开窗-雅黑色' data-lazyload='http://img12.360buyimg.com/n7/g14/M04/0F/10/rBEhVlL558oIAAAAAAnHiyaEN4UAAIhYgDsbgIACcej272.jpg' data-img="1"/></a><div class='picon pi2'><b></b></div></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1067636207.html'>艾美诺三星GALAXY Note2手机套N7100/N7108手机保护皮套手机壳 note2双开窗-雅黑色<font style='color: #ff0000' class='adwords' name='1067636207'></font></a></div><div id='djd1067636207' class='p-price'><strong></strong><span id='p1067636207'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1067636207-1-1.html'>已有998人评价</a></span><span class='reputation'>(92%好评)</span></div><div class='stocklist' stock='1067636207'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1067636207)' stock='1067636207' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1067636207&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1067636207' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1067636207' skuid='1067636207'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='23' onclick='log(7,3,1085572)' sku='1085572'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1085572.html'><img width='220' height='220' alt='倍思 太空通透手机保护壳 适用于华为 麦芒B199 透明' data-lazyload='http://img12.360buyimg.com/n7/g12/M00/04/0F/rBEQYFM7vyAIAAAAAAHR7QE0SgAAADs5wGIQrsAAdIF008.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1085572.html'>倍思 太空通透手机保护壳 适用于华为 麦芒B199 透明<font style='color: #ff0000' class='adwords' name='1085572'></font></a></div><div id='djd1085572' class='p-price'><strong></strong><span id='p1085572'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1085572-1-1.html'>已有83人评价</a></span><span class='reputation'>(93%好评)</span></div><div class='stocklist' stock='1085572'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1085572)' stock='1085572' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1085572&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1085572' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1085572' skuid='1085572'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='24' onclick='log(7,3,1024408205)' sku='1024408205'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1024408205.html'><img width='220' height='220' alt='韩国SPIGEN三星Galaxy S4大黄蜂手机套保护壳 手机壳适用于i9500 i959 藏青色' data-lazyload='http://img10.360buyimg.com/n7/g15/M09/00/17/rBEhWFG1acEIAAAAAANmklr2iD4AAAJEQC0kTkAA2aq146.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1024408205.html'>韩国SPIGEN三星Galaxy S4大黄蜂手机套保护壳 手机壳适用于i9500 i959 藏青色<font style='color: #ff0000' class='adwords' name='1024408205'></font></a></div><div id='djd1024408205' class='p-price'><strong></strong><span id='p1024408205'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1024408205-1-1.html'>已有1903人评价</a></span><span class='reputation'>(91%好评)</span></div><div class='stocklist' stock='1024408205'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1024408205)' stock='1024408205' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1024408205&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1024408205' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1024408205' skuid='1024408205'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='25' onclick='log(7,3,1113068703)' sku='1113068703'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1113068703.html'><img width='220' height='220' alt='艾美诺华为荣耀3C手机套 华为荣耀3C手机壳 荣耀3c手机保护套 华为荣耀3C手机皮套 雅黑色' data-lazyload='http://img13.360buyimg.com/n7/g15/M02/12/1F/rBEhWVM9Ka4IAAAAAAO1W21dZm0AALKbAN5AtEAA7Vz994.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1113068703.html'>艾美诺华为荣耀3C手机套 华为荣耀3C手机壳 荣耀3c手机保护套 华为荣耀3C手机皮套 雅黑色<font style='color: #ff0000' class='adwords' name='1113068703'></font></a></div><div id='djd1113068703' class='p-price'><strong></strong><span id='p1113068703'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1113068703-1-1.html'>已有63人评价</a></span><span class='reputation'>(100%好评)</span></div><div class='stocklist' stock='1113068703'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1113068703)' stock='1113068703' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1113068703&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1113068703' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1113068703' skuid='1113068703'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='26' onclick='log(7,3,976673)' sku='976673'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/976673.html'><img width='220' height='220' alt='奇克摩克 TPU硅胶自带防尘塞手机壳/保护壳 适用于苹果iPhone5s 黑色' data-lazyload='http://img13.360buyimg.com/n7/g14/M09/10/15/rBEhVVI23XcIAAAAAAEQqobFwjMAADQWgDuxdYAARDC602.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/976673.html'>奇克摩克 TPU硅胶自带防尘塞手机壳/保护壳 适用于苹果iPhone5s 黑色<font style='color: #ff0000' class='adwords' name='976673'></font></a></div><div id='djd976673' class='p-price'><strong></strong><span id='p976673'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/976673-1-1.html'>已有18053人评价</a></span><span class='reputation'>(91%好评)</span></div><div class='stocklist' stock='976673'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,976673)' stock='976673' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=976673&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll976673' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_976673' skuid='976673'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='27' onclick='log(7,3,1099646068)' sku='1099646068'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1099646068.html'><img width='220' height='220' alt='韩国SPIGEN三星Galaxy S5手机壳 大黄蜂超薄边框硅胶套 G9006V保护套 炫彩蓝--现货' data-lazyload='http://img13.360buyimg.com/n7/g14/M01/19/04/rBEhVlMnDb8IAAAAAAS3vHckyaYAAKZgwEYmDgABLfU345.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1099646068.html'>韩国SPIGEN三星Galaxy S5手机壳 大黄蜂超薄边框硅胶套 G9006V保护套 炫彩蓝--现货<font style='color: #ff0000' class='adwords' name='1099646068'></font></a></div><div id='djd1099646068' class='p-price'><strong></strong><span id='p1099646068'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1099646068-1-1.html'>已有65人评价</a></span><span class='reputation'>(100%好评)</span></div><div class='stocklist' stock='1099646068'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1099646068)' stock='1099646068' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1099646068&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1099646068' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1099646068' skuid='1099646068'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='28' onclick='log(7,3,1038060)' sku='1038060'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1038060.html'><img width='220' height='220' alt='Freeson 超薄磨砂手机保护壳布丁套 适用于努比亚 小牛2 Z5S mini 透明黑' data-lazyload='http://img10.360buyimg.com/n7/g13/M03/0F/1B/rBEhUlLGbpoIAAAAAAHC3yq9SVcAAHkGgFAt94AAcL3448.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1038060.html'>Freeson 超薄磨砂手机保护壳布丁套 适用于努比亚 小牛2 Z5S mini 透明黑<font style='color: #ff0000' class='adwords' name='1038060'></font></a></div><div id='djd1038060' class='p-price'><strong></strong><span id='p1038060'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1038060-1-1.html'>已有354人评价</a></span><span class='reputation'>(95%好评)</span></div><div class='stocklist' stock='1038060'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1038060)' stock='1038060' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1038060&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1038060' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1038060' skuid='1038060'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='29' onclick='log(7,3,1075377452)' sku='1075377452'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1075377452.html'><img width='220' height='220' alt='维肯（VIKEN）适用于华为荣耀3C手机套 3C手机保护套 支架皮套 黑色' data-lazyload='http://img12.360buyimg.com/n7/g15/M01/02/02/rBEhWFLUlHMIAAAAAALeOTihuusAAH3XgBsIfUAAt5R970.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1075377452.html'>维肯（VIKEN）适用于华为荣耀3C手机套 3C手机保护套 支架皮套 黑色<font style='color: #ff0000' class='adwords' name='1075377452'></font></a></div><div id='djd1075377452' class='p-price'><strong></strong><span id='p1075377452'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1075377452-1-1.html'>已有497人评价</a></span><span class='reputation'>(91%好评)</span></div><div class='stocklist' stock='1075377452'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1075377452)' stock='1075377452' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1075377452&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1075377452' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1075377452' skuid='1075377452'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='30' onclick='log(7,3,962881)' sku='962881'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/962881.html'><img width='220' height='220' alt='名人（WIT） TPU保护后壳软壳 Green Day绿日乐队 适用于iPhone5/5S 白色' data-lazyload='http://img11.360buyimg.com/n7/g13/M08/0A/10/rBEhVFItXu4IAAAAAAFXXwcHYxgAAC8pACyvKQAAVd3887.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/962881.html'>名人（WIT） TPU保护后壳软壳 Green Day绿日乐队 适用于iPhone5/5S 白色<font style='color: #ff0000' class='adwords' name='962881'></font></a></div><div id='djd962881' class='p-price'><strong></strong><span id='p962881'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/962881-1-1.html'>已有1198人评价</a></span><span class='reputation'>(91%好评)</span></div><div class='stocklist' stock='962881'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,962881)' stock='962881' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=962881&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll962881' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_962881' skuid='962881'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='31' onclick='log(7,3,1038059)' sku='1038059'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1038059.html'><img width='220' height='220' alt='Freeson 超薄磨砂手机保护壳布丁套 适用于努比亚 小牛2 Z5S mini 透明白' data-lazyload='http://img14.360buyimg.com/n7/g13/M03/0F/1B/rBEhVFLGbpIIAAAAAAFnChR8b2IAAHkGgAVelYAAWci550.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1038059.html'>Freeson 超薄磨砂手机保护壳布丁套 适用于努比亚 小牛2 Z5S mini 透明白<font style='color: #ff0000' class='adwords' name='1038059'></font></a></div><div id='djd1038059' class='p-price'><strong></strong><span id='p1038059'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1038059-1-1.html'>已有357人评价</a></span><span class='reputation'>(95%好评)</span></div><div class='stocklist' stock='1038059'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1038059)' stock='1038059' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1038059&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1038059' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1038059' skuid='1038059'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='32' onclick='log(7,3,1035407276)' sku='1035407276'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1035407276.html'><img width='220' height='220' alt='SPIGEN韩国三星Galaxy note3大黄蜂保护手机壳套 保护套 适用于N9000 大黄蜂' data-lazyload='http://img11.360buyimg.com/n7/g15/M0A/0F/07/rBEhWVJbe98IAAAAAAUXMzXOrgIAAEHFABcWE8ABRdL224.jpg' data-img="1"/></a><div class='picon pi2'><b></b></div></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1035407276.html'>SPIGEN韩国三星Galaxy note3大黄蜂保护手机壳套 保护套 适用于N9000 大黄蜂<font style='color: #ff0000' class='adwords' name='1035407276'></font></a></div><div id='djd1035407276' class='p-price'><strong></strong><span id='p1035407276'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1035407276-1-1.html'>已有1535人评价</a></span><span class='reputation'>(94%好评)</span></div><div class='stocklist' stock='1035407276'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1035407276)' stock='1035407276' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1035407276&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1035407276' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1035407276' skuid='1035407276'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='33' onclick='log(7,3,936571)' sku='936571'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/936571.html'><img width='220' height='220' alt='Freeson 超薄手机保护后壳 适用于三星Galaxy Note2 N7100/N7102/N719/N7108 透明' data-lazyload='http://img11.360buyimg.com/n7/g15/M00/02/0D/rBEhWVH52bsIAAAAAAHPO94JEvcAABm8QOxM6gAAc9T329.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/936571.html'>Freeson 超薄手机保护后壳 适用于三星Galaxy Note2 N7100/N7102/N719/N7108 透明<font style='color: #ff0000' class='adwords' name='936571'></font></a></div><div id='djd936571' class='p-price'><strong></strong><span id='p936571'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/936571-1-1.html'>已有4091人评价</a></span><span class='reputation'>(93%好评)</span></div><div class='stocklist' stock='936571'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,936571)' stock='936571' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=936571&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll936571' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_936571' skuid='936571'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='34' onclick='log(7,3,1094684)' sku='1094684'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1094684.html'><img width='220' height='220' alt='小辣椒 红辣椒4G版保护套 手机保护套 红辣椒4G版原装保护壳' data-lazyload='http://img14.360buyimg.com/n7/g12/M00/04/0C/rBEQYVM7gGIIAAAAAACw4ObX0O4AADrhgCKRLMAALD4017.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1094684.html'>小辣椒 红辣椒4G版保护套 手机保护套 红辣椒4G版原装保护壳<font style='color: #ff0000' class='adwords' name='1094684'></font></a></div><div id='djd1094684' class='p-price'><strong></strong><span id='p1094684'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1094684-1-1.html'>已有26人评价</a></span><span class='reputation'>(88%好评)</span></div><div class='stocklist' stock='1094684'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1094684)' stock='1094684' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1094684&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1094684' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1094684' skuid='1094684'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+<li index='35' onclick='log(7,3,1116816774)' sku='1116816774'><div class='lh-wrap'><div class='p-img'><a target='_blank'  href='http://item.jd.com/1116816774.html'><img width='220' height='220' alt='艾美诺适用华为荣耀3X手机套 手机保护套 送贴膜支架皮套 G750手机壳 3X开窗皮套 玫红色' data-lazyload='http://img14.360buyimg.com/n7/g15/M05/14/07/rBEhWlNDx-UIAAAAAASaiV9mLZ4AALaOAMcin8ABJqh919.jpg' data-img="1"/></a></div><div class='p-name'><a target='_blank' href='http://item.jd.com/1116816774.html'>艾美诺适用华为荣耀3X手机套 手机保护套 送贴膜支架皮套 G750手机壳 3X开窗皮套 玫红色<font style='color: #ff0000' class='adwords' name='1116816774'></font></a></div><div id='djd1116816774' class='p-price'><strong></strong><span id='p1116816774'></span></div><div class='extra'><span class='evaluate'><a target='_blank' href='http://club.jd.com/review/1116816774-1-1.html'>已有33人评价</a></span><span class='reputation'>(100%好评)</span></div><div class='stocklist' stock='1116816774'><span class='st33'>山东有货</span></div><div class='btns'><a onclick='log(1,7,1116816774)' stock='1116816774' tpl='1' href='http://gate.jd.com/InitCart.aspx?pid=1116816774&pcount=1&ptype=1' target='_blank' class='btn-buy'>加入购物车</a><a id='coll1116816774' href='javascript:;' class='btn-coll'>关注</a><a class='btn-compare btn-compare-s' id='comp_1116816774' skuid='1116816774'><span></span>对比</a></div><div class="p-shopnum"></div></div></li>
+</ul>
+</div>
+<script type="text/javascript">var jdwsment = {"key":"8C7D17667DBC9FAB931ACBBB2BCCBB5973EB8FD8","skuids":"976675,1061860985,1105246640,1048609059,883571,1044428,883568,1049013618,1038259853,1105246641,1090034303,1044692520,1035407277,1024408203,1100919251,1069003974,1035407279,1097120629,1096281936,1070850,930821,883566,1067636207,1085572,1024408205,1113068703,976673,1099646068,1038060,1075377452,962881,1038059,1035407276,936571,1094684,1116816774"};</script>
+<script type="text/javascript">var yushowSkuIds = "";</script>
+<script>(function() {var plist = $('#plist'),ul = plist.children('.list-h'),li = ul.children('li'),skuids = [], res = [], flag = 0;if ( typeof jdwsment !== 'undefined') {skuids = jdwsment.skuids.split(',');} else {for (var i = 0; i < li.length; i++) {skuids.push( li.eq(i).attr('sku') );}}function getPrice(skuids) {var areaId = '13_2900_3533';$.ajax({url: 'http://p.3.cn/prices/mgets?skuIds=J_' + skuids.join(',J_') + '&type=1&area=' + areaId ,dataType: 'jsonp',success: function(r) {if ( !r && !r.length ) { return false; }for ( var i = 0; i < r.length; i++ ) {var sku = r[i].id.replace('J_', '');var price = r[i].p;if ( price > 0 ) {ul.children('li[sku="'+ sku +'"]').find('.p-price strong').html( '￥' + price + '' );} else {ul.children('li[sku="'+ sku +'"]').find('.p-price strong').html( '暂无报价' );}}}});}getPrice(skuids);})();</script>
+<div class="m clearfix">
+<div class="pagin fr"><span class='prev-disabled'>上一页<b></b></span>
+<a href='9987-830-866-0-109776-0-0-0-0-0-1-1-1-1-13-2900-3533-0.html' class='current'>1</a>
+<a href='9987-830-866-0-109776-0-0-0-0-0-1-1-2-1-13-2900-3533-0.html'>2</a>
+<a href='9987-830-866-0-109776-0-0-0-0-0-1-1-3-1-13-2900-3533-0.html'>3</a>
+<span class='text'>…</span>
+<a href='9987-830-866-0-109776-0-0-0-0-0-1-1-444-1-13-2900-3533-0.html'>444</a>
+<a href='9987-830-866-0-109776-0-0-0-0-0-1-1-2-1-13-2900-3533-0.html' class='next' >下一页<b></b></a>
+</div>
+</div>
+<div reco_id="2" class="shop-choice hide" id="shop-choice"></div>
+
+    </div>
+
+    <script type="text/javascript">
+        /*商品精选bigen*/
+
+
+        if("1315,11729,6144,9855,1320,1319,6233,1318,1672,5025,1316,9847,6994,1620,6728,6196,9987,670,652,737,12259,12218,9192".indexOf(psid1) != -1 && "2641,1502,1503,1505,1507,1504".indexOf(psid3) == -1 ) {
+            if( window.screen.width < 1210 ) {
+                $('<iframe id="shopChoiceFrame" onload="showShopChoiceFrmae()" scrolling="no" frameborder="0" class="hide" style="width:770px;height:290px;" marginheight="0" marginwidth="0" src="http://x.jd.com/ad?ad_id=70&hj_id=48&tag=' + psid3+ '&cid=' + psid1 + '-' + psid2 + '-' + psid3 + '"></iframe>')
+                        .appendTo(".right-extra");
+            } else {
+                $('<iframe id="shopChoiceFrame" onload="showShopChoiceFrmae()" scrolling="no" frameborder="0" class="hide" style="width:990px;height:290px;" marginheight="0" marginwidth="0" src="http://x.jd.com/ad?ad_id=73&hj_id=48&tag=' + psid3+ '&cid=' + psid1 + '-' + psid2 + '-' + psid3 + '"></iframe>')
+                        .appendTo(".right-extra");
+            }
+
+        }
+
+
+        function showShopChoiceFrmae(){
+            $('#shopChoiceFrame').show();
+        }
+        /*商品精选end*/
+
+       /* 扩展属性 begin*/
+       if( window.screen.width < 1210 ) {
+           $('div[rel]').each(function(i){
+              if( i>=10 ) {
+                  $(this).attr('brand','more');
+                  $(this).hide();
+              }
+           });
+
+       }
+
+       $('.brand-attr li[rel]:not(:first)').each(function(){
+           var rel = $(this).attr('rel');
+           if ( $('.brand-attr .tabcon div[rel=' + rel + ']').length == 0 ) {
+               $(this).hide();
+           }
+
+       });
+
+        $('li[rel]').bind('mouseover',function(){
+            var rel = $(this).attr('rel');
+            $(this).addClass('curr');
+            $('li:not([rel='+rel+'])').removeClass('curr');
+
+            if( rel==0 ) {
+                $('div[rel]').show();
+            } else {
+                $('div[rel='+rel+']').show();
+                $('div[rel]:not([rel='+rel+'])').hide();
+
+            }
+        });
+
+       $('.prop-attrs:not(.hide) .f-list').each(function(){
+
+           if( $(this).find('li:last').position().top > 0 ){
+               $(this).parent().parent().find('[option=more]').show();
+           }
+
+       });
+
+        $(".show-logo div:not(.curr)").bind("mouseover",function(){
+            $(this).addClass("hover");
+        }).bind("mouseout",function(){
+                    $(this).removeClass("hover")
+        });
+
+        function moreProp(t){
+            $(t).hide();
+            $('#lessProp').show();
+
+            $('[overFour]').show();
+            $('.prop-attrs[overFour] .f-list').each(function(){
+                if( $(this).find('li:last').position().top > 0 ){
+                    $(this).parent().parent().find('[option=more]').show();
+                }
+
+            });
+
+        }
+
+        function lessProp(t){
+            $(t).hide();
+            $('#moreProp').show();
+            $('[overFour]').hide();
+
+        }
+
+        function moreBrand(){
+            $('.brand-attr ul.tab').show();
+
+            $('.brand-attr [option=more]').hide();
+            $('.brand-attr [option=less]').show();
+
+            $('.brand-attr div[brand=more]').show();
+
+            $('.brand-attr div.tabcon').addClass('tabcon-multi');
+            if(psid3 == 655) {
+                $('.brand-attr div.tabcon').addClass('height185');
+            }
+
+
+            $('li[rel].curr').removeClass('curr');
+            $('li[rel]:first').addClass('curr');
+        }
+
+
+
+        function lessBrand(){
+            $('.brand-attr ul.tab').hide();
+
+            $('.brand-attr [option=more]').show();
+            $('.brand-attr [option=less]').hide();
+
+            $('.brand-attr div[brand=less]').show();
+            $('.brand-attr div[brand=more]').hide();
+
+            $('.brand-attr div.tabcon').removeClass('tabcon-multi');
+            if(psid3 == 655) {
+                $('.brand-attr div.tabcon').removeClass('height185');
+            }
+
+        }
+        function moreExpandValue(t){
+            $(t).hide().next().show();
+            $(t).parent().find('.v-fold').addClass('v-unfold');
+
+        }
+        function lessExpandValue(t){
+            $(t).parent().find('.v-fold').removeClass('v-unfold');
+            $(t).hide().prev().show();
+
+        }
+
+
+        $('#select-tv a.fore:not(.curr)').bind('mouseover',function(){
+            $(this).addClass('curr');
+        }).bind('mouseout',function(){
+            $(this).removeClass('curr');
+        });
+
+
+        $('#video-card div.fore:not(.curr)').bind('mouseover',function(){
+            $(this).addClass('curr');
+        }).bind('mouseout',function(){
+            $(this).removeClass('curr');
+        });
+
+
+        /* 扩展属性 end*/
+
+        /*预售 begin*/
+       var yushouTimerList = [];
+       function convertSecond2Date(ms) {//将毫秒数换算成x天x时x分x秒x毫秒
+           var mi = 60;
+           var hh = mi * 60;
+           var dd = hh * 24;
+
+           var day = Math.floor(ms / dd);
+           var hour = Math.floor((ms - day * dd) / hh);
+           var minute = Math.floor((ms - day * dd - hour * hh) / mi);
+           var second = Math.floor(ms - day * dd - hour * hh - minute * mi);
+
+           if(day == 0) {
+               return hour + "时" + minute + "分" + second + "秒";
+           }else{
+               return day + "天" + hour + "时" + minute + "分";
+           }
+       }
+
+       if(yushowSkuIds) {
+           var yushowSkuIdsArr = yushowSkuIds.split(",");
+
+           for( var i = 0; i < yushowSkuIdsArr.length; i++ ) {
+               var skuId = yushowSkuIdsArr[i];
+
+               if(skuId&&skuId!=""){
+                   $.getJSONP('http://soa.yushou.jd.com/yushoulistinfo.action?sku=' + skuId + '&callback=yushou');
+               }
+           }
+       }
+
+
+       function showYushouTime(){
+           for(var i = 0; i < yushouTimerList.length; i++){
+               var yushowTimer = yushouTimerList[i];
+               yushowTimer.d--;
+               if(yushowTimer.t < 0){
+                   return;
+               }
+
+               var yushouEl = $('#plist .list-h li[sku=' + yushowTimer.w + ']');
+               if( yushowTimer.s == 0 ) {
+                   yushouEl.find('.p-img a em').html(convertSecond2Date(yushowTimer.d)+"后开始");
+
+               } else {
+                   yushouEl.find('.p-img a em').html('剩余'+convertSecond2Date(yushowTimer.d));
+               }
+
+
+           }
+           setTimeout(showYushouTime,1000);
+
+       }
+
+       setTimeout(showYushouTime,1000);
+
+       function yushou( data ){
+
+            if(data.type == 2){
+                var ret = data.ret;
+                var skuId = ret.w;
+                var yushouEl = $('#plist .list-h li[sku=' + skuId + ']');
+
+                yushouTimerList[yushouTimerList.length] = {w:skuId,d:ret.d,s:ret.s};
+                if( ret.s == 0 ) {
+                    yushouEl.find('.p-img a').append('<div class="prebuy-time"><div class="pt-bg"></div><i></i><span>等待预售</span><em>' + convertSecond2Date(data.ret.d) + '后开始</em></div>');
+
+                } else {
+                    yushouEl.find('.p-img a').append('<div class="prebuy-time"><div class="pt-bg"></div><i></i><span>预售中</span><em>剩余' + convertSecond2Date(data.ret.d) + '</em></div>');
+
+                }
+
+
+                if (ret.t==2 ){
+                    var html = '<div clstag="" class="sp-stage clearfix">';
+
+                    for(var i = 0; i < ret.sa.length; i++) {
+                        var sa = ret.sa[i];
+                        var currCls = "";
+                        var timeoutCls = "";
+
+                        var hoverd = "";
+                        if ( i == (ret.cs-1) ) {
+                            currCls = " curr";
+                            hoverd = '<em class="hoverd">预订' + ret.cc + '人</em>';
+                        }
+
+                        if(i)
+
+                        html += '<span class="item  ' + currCls + '"><a href="javascript:void(0)"><em>满' + sa.c + '人</em>' + hoverd + '<strong>￥' + sa.m + '</strong></a><i class="bottom"><em></em></i></span>';
+                    }
+
+                    html += '</div>'
+
+                    $(html).insertAfter(yushouEl.find('.p-price'));
+
+                }
+
+
+                yushouEl.find('.p-price').append('<i class="prebuy-num">（已有' + ret.cc + '人预订）</i>');
+                yushouEl.find('.p-price strong').html(ret.cp);
+
+                yushouEl.find('.btn-buy').attr('href','http://cart.jd.com/cart/dynamic/presale.action?pid=' + skuId + '&pcount=1&ptype=1');
+
+
+                if( ret.s == 0 ) {
+                    yushouEl.find('.btn-buy').text('等待支付定金').addClass('disable');
+                } else {
+                    yushouEl.find('.btn-buy').text('支付定金');
+
+                }
+
+
+
+                yushouEl.addClass('prebuy-item');
+
+                yushouEl.bind('mouseover',function(){
+                    $(this).addClass('hover');
+                })
+
+                yushouEl.bind('mouseout',function(){
+                    $(this).removeClass('hover');
+                })
+
+            }
+
+        }
+
+        /*预售 end*/
+
+    </script>
+    <!--right-extra end-->
+    <script type="text/javascript"> function lazyload(option) { var settings = { defObj: null, defHeight: 0 }; settings = $.extend(settings, option || {}); var defHeight = settings.defHeight, defObj = (typeof settings.defObj == "object") ? settings.defObj.find("img") : $(settings.defObj).find("img"); var pageTop = function() { var d = document, y = (navigator.userAgent.toLowerCase().match(/iPad/i) == "ipad") ? window.pageYOffset : Math.max(d.documentElement.scrollTop, d.body.scrollTop); return d.documentElement.clientHeight + y - settings.defHeight }; var imgLoad = function() { defObj.each(function() { if ($(this).offset().top <= pageTop()) { var src2 = $(this).attr("src2"); if (src2) { $(this).attr("src", src2).removeAttr("src2") } } }) }; imgLoad(); $(window).bind("scroll", function() { imgLoad() }) } lazyload({ defObj: "#plist" })</script>
+    <div class="left">
+        <div class="m" id="sortlist" clstag="thirdtype|keycount|thirdtype|sortlist">
+            
+<div class="mt"><h2>手机</h2></div><DIV class=mc><DIV class=item><H3><B></B>手机通讯</H3>
+<UL>
+<LI><a href='http://list.jd.com/9987-653-655.html'>手机</a></LI>
+<LI><a href='http://list.jd.com/9987-653-659.html'>对讲机</a></LI>
+</UL></DIV><DIV class=item><H3><B></B>运营商</H3>
+<UL>
+<LI><a href='http://list.jd.com/9987-6880-6881.html'>购机送费</a></LI>
+<LI><a href='http://list.jd.com/9987-6880-6882.html'>“0”元购机</a></LI>
+<LI><a href='http://list.jd.com/9987-6880-1195.html'>选号入网</a></LI>
+</UL></DIV><DIV class="item current"><H3><B></B>手机配件</H3>
+<UL>
+<LI><a href='http://list.jd.com/9987-830-860.html'>手机电池</a></LI>
+<LI><a href='http://list.jd.com/9987-830-863.html'>蓝牙耳机</a></LI>
+<LI><a href='http://list.jd.com/9987-830-861.html'>充电器/数据线</a></LI>
+<LI><a href='http://list.jd.com/9987-830-862.html'>手机耳机</a></LI>
+<LI><a href='http://list.jd.com/9987-830-867.html'>手机贴膜</a></LI>
+<LI><a href='http://list.jd.com/9987-830-1099.html'>手机存储卡</a></LI>
+<LI><a href='http://list.jd.com/9987-830-866.html'>手机保护套</a></LI>
+<LI><a href='http://list.jd.com/9987-830-864.html'>车载配件</a></LI>
+<LI><a href='http://list.jd.com/9987-830-5003.html'>iPhone 配件</a></LI>
+<LI><a href='http://list.jd.com/9987-830-868.html'>创意配件</a></LI>
+<LI><a href='http://list.jd.com/9987-830-11301.html'>便携/无线音响</a></LI>
+<LI><a href='http://list.jd.com/9987-830-11302.html'>手机饰品</a></LI>
+</UL></DIV></DIV>
+
+        </div>
+        <!--sortlist end-->
+        <script type="text/javascript">
+            $("#sortlist h3").bind("click",function(){
+                var element=$(this).parent();
+                if (element.hasClass("current")){
+                    element.removeClass("current");
+                }else{
+                    element.addClass("current");
+                }
+            })
+        </script>
+
+        <div class="m limitbuy hide" id="limitbuy537" clstag="thirdtype|keycount|thirdtype|limitbuy536">
+<div class="mt">
+<h2>消费电子限时抢购</h2>
+</div>
+<div class="mc">
+<div class="clock" id="clock537">正在加载…</div>
+<div id="limit537"></div>
+</div>
+</div><!--limitbuy end -->
+
+        <!--<iframe id="ad" scrolling="no" frameborder="0" style="width:210px;height:240px;margin-bottom: 10px;" marginheight="0"  marginwidth="0" src=""></iframe>-->
+        <div style="margin-bottom: 10px">
+            <script type="text/javascript">
+                jd_ad_client = 60;
+                jd_ad_width =  210;
+                jd_ad_height = 240;
+                jd_ad_type = 8;
+                jd_ad_spread = 1;
+                jd_ad_num = 1;
+                jd_ad_category = 866;
+            </script>
+            <script type="application/javascript" src=" http://static.360buyimg.com/dsp/ssp.js "></script>
+        </div>
+        <div style="margin-bottom: 10px">
+            <script type="text/javascript">
+                jd_ad_client = 88;
+                jd_ad_width = 210;
+                jd_ad_height = 261;
+                jd_ad_type=8;
+                jd_ad_spread=1;
+                jd_ad_num=1;
+                jd_ad_category= 866;
+            </script>
+            <script type="application/javascript" src=" http://static.360buyimg.com/dsp/ssp.js "></script>
+        </div>
+
+        <div id="ad_left" reco_id="6" class="m m0 hide"></div><!--搜索广告推荐-->
+
+
+        <script type="text/javascript">
+
+            if("1315,11729,6144,9855,1320,1319,6233,1318,1672,5025,1316,9847,6994,1620,6728,6196,9987,670,652,737,12259,12218,9192".indexOf(psid1) != -1 && "2641,1502,1503,1505,1507,1504".indexOf(psid3) == -1) {
+                $('<iframe id="adLeftFrame" onload="showAdLeftFrame();" class="hide" scrolling="no" frameborder="0" style="width:210px;height:563px;margin-bottom: 10px;" marginheight="0" marginwidth="0" src="http://x.jd.com/ad?ad_id=72&hj_id=47&tag=' + psid3 + '&cid=' + psid1 + '-' + psid2 + '-' + psid3 + '"></iframe>')
+                        .insertAfter('#ad_left');
+            }
+
+            function showAdLeftFrame(){
+                $('#adLeftFrame').show();
+            }
+
+        </script>
+
+        <div id="finalbuy" class="hide m m0"></div><!--关注手机最终购买-->
+        <div id="weekRank" class="m rank" clstag="thirdtype|keycount|thirdtype|mrank">
+            <div class="mt">
+                <h2>一周销量排行榜</h2>
+            </div>
+            <div class="mc">
+                <ul class="tabcon">
+                    
+<li class="fore fore1"><span>1</span><div class="p-img" ><a target="_blank"  href="http://item.jd.com/482129.html"><img alt="羽博（Yoobao）保护布袋 多用途数码包" src="http://img14.360buyimg.com/n5/g13/M03/01/18/rBEhUlHBWP0IAAAAAAHoMWhQkGQAAAWLAKJMAUAAehJ911.jpg" width="50" height="50"></a></div><div class="p-name"><a target="_blank"  href="http://item.jd.com/482129.html">羽博（Yoobao）保护布袋 多用途数码包</a></div><div class="p-price"  sku="482129" ><strong></strong></div></li><li  class="fore2"><span>2</span><div class="p-img" style="display:none;"><a target="_blank"  href="http://item.jd.com/1062987.html"><img alt="小米（MI）原厂正品 10400毫安金属外壳移动电源保护套 白色" src="http://img12.360buyimg.com/n5/g15/M02/15/01/rBEhWlNGe-UIAAAAAABkipfIqrUAALkAwCcN68AAGSi106.jpg" width="50" height="50"></a></div><div class="p-name"><a target="_blank"  href="http://item.jd.com/1062987.html">小米（MI）原厂正品 10400毫安金属外壳移动电源保护套 白色</a></div><div class="p-price"  sku="1062987" style="display:none;" ><strong></strong></div></li><li  class="fore3"><span>3</span><div class="p-img" style="display:none;"><a target="_blank"  href="http://item.jd.com/746125.html"><img alt="洛克（ROCK）纹系列 手机侧翻保护套 适用于苹果iPhone5/5s 粉红色" src="http://img10.360buyimg.com/n5/g7/M03/0D/0A/rBEHZlCSKjwIAAAAAAD1CMXjN-oAACmpwER2hoAAPUg382.jpg" width="50" height="50"></a></div><div class="p-name"><a target="_blank"  href="http://item.jd.com/746125.html">洛克（ROCK）纹系列 手机侧翻保护套 适用于苹果iPhone5/5s 粉红色</a></div><div class="p-price"  sku="746125" style="display:none;" ><strong></strong></div></li><li><span>4</span><div class="p-img" style="display:none;"><a target="_blank"  href="http://item.jd.com/905921.html"><img alt="奇克摩克 经典双色运动风手机壳/保护壳 适用于苹果 iPhone5/5s 黑色" src="http://img11.360buyimg.com/n5/g14/M00/00/0C/rBEhVlGyhkgIAAAAAAH7Job_lJgAAAE0AAQz-QAAfs-604.jpg" width="50" height="50"></a></div><div class="p-name"><a target="_blank"  href="http://item.jd.com/905921.html">奇克摩克 经典双色运动风手机壳/保护壳 适用于苹果 iPhone5/5s 黑色</a></div><div class="p-price"  sku="905921" style="display:none;" ><strong></strong></div></li><li><span>5</span><div class="p-img" style="display:none;"><a target="_blank"  href="http://item.jd.com/1038362.html"><img alt="睿量（REMAX） 超薄0.5mm保护壳 适用于苹果iPhone5/5s 透黄" src="http://img12.360buyimg.com/n5/g15/M05/12/09/rBEhWFM6ax4IAAAAAAJnrD9X6J0AALBvQKV0iYAAmfE335.jpg" width="50" height="50"></a></div><div class="p-name"><a target="_blank"  href="http://item.jd.com/1038362.html">睿量（REMAX） 超薄0.5mm保护壳 适用于苹果iPhone5/5s 透黄</a></div><div class="p-price"  sku="1038362" style="display:none;" ><strong></strong></div></li><li><span>6</span><div class="p-img" style="display:none;"><a target="_blank"  href="http://item.jd.com/984486.html"><img alt="Quick Window LG原装智能皮套（白色）适用于LG G2" src="http://img11.360buyimg.com/n5/g15/M05/0F/00/rBEhWVJZEg0IAAAAAADFBrfffuwAAEEUQKrU-YAAMUe167.jpg" width="50" height="50"></a></div><div class="p-name"><a target="_blank"  href="http://item.jd.com/984486.html">Quick Window LG原装智能皮套（白色）适用于LG G2</a></div><div class="p-price"  sku="984486" style="display:none;" ><strong></strong></div></li><li><span>7</span><div class="p-img" style="display:none;"><a target="_blank"  href="http://item.jd.com/738679.html"><img alt="倍思 LBTYSJD-11 多用途保护套 卡其色" src="http://img14.360buyimg.com/n5/g8/M03/08/1C/rBEHaFB7y2MIAAAAAAJ1nrjW2n8AABvHwNTX9gAAnW2648.jpg" width="50" height="50"></a></div><div class="p-name"><a target="_blank"  href="http://item.jd.com/738679.html">倍思 LBTYSJD-11 多用途保护套 卡其色</a></div><div class="p-price"  sku="738679" style="display:none;" ><strong></strong></div></li><li><span>8</span><div class="p-img" style="display:none;"><a target="_blank"  href="http://item.jd.com/953376.html"><img alt="朗客 炫彩系列支撑功能保护套 手机套/手机壳 适用于红米手机 黑色" src="http://img11.360buyimg.com/n5/g15/M08/03/02/rBEhWFLc2qQIAAAAAAKA87lw3NoAAID4QCMtjEAAoEL762.jpg" width="50" height="50"></a></div><div class="p-name"><a target="_blank"  href="http://item.jd.com/953376.html">朗客 炫彩系列支撑功能保护套 手机套/手机壳 适用于红米手机 黑色</a></div><div class="p-price"  sku="953376" style="display:none;" ><strong></strong></div></li>
+
+                </ul>
+            </div>
+        </div>
+        <!--rank end-->
+        <div id="alsobuy" class="hide m m0"></div><!--浏览XXX还购买了--><div class="m" clstag="thirdtype|keycount|thirdtype|m" id="da211x261-1"></div>
+    </div>
+    <!--left end-->
+    <span class="clr"></span>
+    <div id="Collect_Tip" class="Tip360 w260"></div>
+</div>
+
+<script>
+
+
+
+    function refreshPrice(area) {
+        var skuids = [],
+                hotSalePriceQ = $("#hotsale .p-price"),
+                weekRankPriceQ = $("#weekRank .p-price"),
+                skuId;
+
+        for (var i = 0, l=hotSalePriceQ.length; i < l; i++) {
+            skuId = hotSalePriceQ.eq(i).attr('sku');
+            if ( skuId ) {
+                skuids.push( skuId );
+            }
+        }
+        for (var i = 0, l=weekRankPriceQ.length; i < l; i++) {
+            skuId = weekRankPriceQ.eq(i).attr('sku');
+            if ( skuId ) {
+                skuids.push( skuId );
+            }
+        }
+
+        function getPrice(skuids) {
+            if ( !skuids || skuids.length == 0 ) {
+                return;
+            }
+
+
+            $.ajax({
+                url: 'http://p.3.cn/prices/mgets?skuIds=J_' + skuids.join(',J_') + '&type=1&area='+area,
+                dataType: 'jsonp',
+                success: function(r) {
+                    if ( !r && !r.length ) { return false; }
+                    for ( var i = 0; i < r.length; i++ ) {
+                        var sku = r[i].id.replace('J_', '');
+                        var price = r[i].p;
+                        if ( price > 0 ) {
+                            $(".p-price[sku='"+sku+"']").children("strong").html( '\uffe5' + price);
+                        } else {
+                            $(".p-price[sku='"+sku+"']").children("strong").html( '暂无报价' );
+                        }
+                    }
+                }
+            });
+        }
+        getPrice(skuids);
+    };
+
+
+
+</script>
+
+<script type="text/javascript">
+
+
+
+    var weekRank2Effect = function (){
+        var firstNode = $("#weekRank li").eq(0);
+
+        function  bindEvent(linode,i){
+            linode.bind('mouseover',function(){
+                if( i != 0 ) {
+                    firstNode.removeClass('fore').find('.p-img').hide();
+                    firstNode.find('.p-price').hide();
+
+                    linode.addClass('fore').find('.p-img').show();
+                    linode.find('.p-price').show();
+                }
+            }).bind('mouseout',function(){
+                        if( i != 0 ) {
+                            linode.removeClass('fore').find('.p-img').hide();
+                            linode.find('.p-price').hide();
+
+                            firstNode.addClass('fore').find('.p-img').show();
+                            firstNode.find('.p-price').show();
+                        }
+                    });
+        }
+        $("#weekRank").find("li").each(function(i){
+            var linode = $(this);
+            bindEvent(linode,i);
+        });
+    }
+
+    weekRank2Effect();
+</script>
+<div class="w">
+    <div id="product-track">
+        <div class="right">
+            <div id="maybe-like" class="m m2" data-widget="tabs">
+                <div class="mt">
+                    <h2>根据浏览猜你喜欢</h2>
+                    <div class="extra">
+                    </div>
+                </div>
+                <div class="mc">
+                    <div class="iloading">正在加载中，请稍候...</div>
+                </div>
+            </div>
+            <!--maybe-like-->
+        </div><!-- right -->
+        <div class="left">
+            <div id="recent-view-track" class="m m2">
+                <div class="mt">
+                    <h2>最近浏览</h2>
+                </div>
+                <div class="mc">
+                    <div class="iloading">正在加载中，请稍候...</div>
+                </div>
+            </div>
+            <!--recent-view-track end-->
+        </div><!-- left -->
+        <span class="clr"></span>
+    </div>
+</div>
+<script type='text/javascript'>
+    if( window.screen.width < 1210 ){
+        document.write('\<script\>jd_ad_client = 89;jd_ad_width = 990;jd_ad_height = 115;jd_ad_type=8;jd_ad_spread=1;jd_ad_num=1;jd_ad_category=;;\</script\>\<script src="http://static.360buyimg.com/dsp/ssp.js" type="text/javascript"\>\</script\>')
+    } else {
+        document.write('\<script\>jd_ad_client = 94;jd_ad_width = 1210;jd_ad_height = 115;jd_ad_type=8;jd_ad_spread=1;jd_ad_num=1;jd_ad_category=866;\</script\>\<script src="http://static.360buyimg.com/dsp/ssp.js" type="text/javascript"\>\</script\>')
+    }
+</script>
+<div class="w">
+    <div id="service-2013">
+        <dl class="fore1">
+            <dt><b></b><strong>购物指南</strong></dt>
+            <dd>
+                <div><a href="http://help.jd.com/help/question-56.html" target="_blank" rel="nofollow">购物流程</a></div>
+                <div><a href="http://help.jd.com/help/question-57.html" target="_blank" rel="nofollow">会员介绍</a></div>
+                <div><a href="http://help.jd.com/help/question-181.html" target="_blank" rel="nofollow">团购/机票</a></div>
+                <div><a href="http://help.jd.com/help/question-61.html" target="_blank" rel="nofollow">常见问题</a></div>
+                <div><a href="http://help.jd.com/help/question-63.html" target="_blank" rel="nofollow">大家电</a></div>
+                <div><a href="http://help.jd.com/index.html" target="_blank" rel="nofollow">联系客服</a></div>
+            </dd>
+        </dl>
+        <dl class="fore2">
+            <dt><b></b><strong>配送方式</strong></dt>
+            <dd>
+                <div><a href="http://help.jd.com/help/question-64.html" target="_blank" rel="nofollow">上门自提</a></div>
+                <div><a href="http://help.jd.com/help/question-360.html" target="_blank" rel="nofollow">211限时达</a></div>
+                <div><a href="http://help.jd.com/help/distribution-768.html" target="_blank" rel="nofollow">配送服务查询</a></div>
+                <div><a href="http://help.jd.com/help/question-892.html#help2215" target="_blank" rel="nofollow">配送费收取标准</a></div>
+                <div><a href="http://market.jd.com/giftcard/index.html#one5" target="_blank" rel="nofollow">如何送礼</a></div>
+                <div><a href="http://help.en.360buy.com/help/question-2.html" target="_blank">Global Shipping</a></div>
+            </dd>
+        </dl>
+        <dl class="fore3">
+            <dt><b></b><strong>支付方式</strong></dt>
+            <dd>
+                <div><a href="http://help.jd.com/help/question-67.html" target="_blank" rel="nofollow">货到付款</a></div>
+                <div><a href="http://help.jd.com/help/question-68.html" target="_blank" rel="nofollow">在线支付</a></div>
+                <div><a href="http://help.jd.com/help/question-71.html" target="_blank" rel="nofollow">分期付款</a></div>
+                <div><a href="http://help.jd.com/help/question-69.html" target="_blank" rel="nofollow">邮局汇款</a></div>
+                <div><a href="http://help.jd.com/help/question-70.html" target="_blank" rel="nofollow">公司转账</a></div>
+            </dd>
+        </dl>
+        <dl class="fore4">
+            <dt><b></b><strong>售后服务</strong></dt>
+            <dd>
+                <div><a href="http://myjd.jd.com/afs/help/afshelp.action" target="_blank" rel="nofollow">售后政策</a></div>
+                <div><a href="http://help.jd.com/help/question-99.html" target="_blank" rel="nofollow">价格保护</a></div>
+                <div><a href="http://help.jd.com/help/question-100.html" target="_blank" rel="nofollow">退款说明</a></div>
+                <div><a href="http://myjd.jd.com/repair/repairs.action" target="_blank" rel="nofollow">返修/退换货</a></div>
+                <div><a href="http://help.jd.com/help/question-881.html" target="_blank" rel="nofollow">取消订单</a></div>
+            </dd>
+        </dl>
+        <dl class="fore5">
+            <dt><b></b><strong>特色服务</strong></dt>
+            <dd>
+                <div><a href="http://help.jd.com/help/question-79.html" target="_blank">夺宝岛</a></div>
+                <div><a href="http://help.jd.com/help/question-86.html" target="_blank">DIY装机</a></div>
+                <div><a href="http://fuwu.jd.com/" target="_blank" rel="nofollow">延保服务</a></div>
+                <div><a href="http://market.jd.com/giftcard/index.html" target="_blank" rel="nofollow">京东卡</a></div>
+                <div><a href="http://help.jd.com/help/question-91.html" target="_blank" rel="nofollow">节能补贴</a></div>
+            </dd>
+        </dl>
+        <span class="clr"></span>
+    </div>
+</div><!-- service end -->
+<div class="w">
+    <div id="footer-2013">
+        <div class="links"><a href="http://www.jd.com/intro/about.aspx" target="_blank" rel="nofollow">关于我们</a>|<a href="http://www.jd.com/contact/" target="_blank" rel="nofollow">联系我们</a>|<a href="http://zhaopin.jd.com/" target="_blank" rel="nofollow">人才招聘</a>|<a href="http://www.jd.com/contact/joinin.aspx" target="_blank" rel="nofollow">商家入驻</a>|<a href="http://sale.jd.com/act/y3surX7qpM.html" target="_blank" rel="nofollow">广告服务</a>|<a href="http://app.jd.com/" target="_blank" rel="nofollow">手机京东</a>|<a href="http://club.jd.com/links.aspx" target="_blank">友情链接</a>|<a href="http://cps.jd.com/" target="_blank">销售联盟</a>|<a target="_blank" href="http://club.jd.com/">京东社区</a>|<a target="_blank" href="http://gongyi.jd.com">京东公益</a></div>
+        <div class="copyright">北京市公安局朝阳分局备案编号110105014669&nbsp;&nbsp;|&nbsp;&nbsp;京ICP证070359号&nbsp;&nbsp;|&nbsp;&nbsp;互联网药品信息服务资格证编号(京)-非经营性-2011-0034<br><a target="_blank" href="http://misc.360buyimg.com/skin/df/i/com/f_music.jpg" rel="nofollow">音像制品经营许可证苏宿批005号</a>&nbsp;&nbsp;|&nbsp;&nbsp;出版物经营许可证编号新出发(苏)批字第N-012号&nbsp;&nbsp;|&nbsp;&nbsp;互联网出版许可证编号新出网证(京)字150号<br><a target="_blank" href="http://misc.360buyimg.com/wz/wlwhjyxkz.jpg">网络文化经营许可证京网文[2011]0168-061号</a>&nbsp;&nbsp;Copyright&nbsp;&copy;&nbsp;2004-2014&nbsp;&nbsp;京东JD.com&nbsp;版权所有<br />京东旗下网站：<a href="http://www.360top.com/" target="_blank">360TOP</a>&nbsp;&nbsp;<a href="http://www.minitiao.com/" target="_blank">迷你挑</a>&nbsp;&nbsp;<a target="_blank" href="http://en.jd.com/">English Site</a></div>
+        <div class="authentication"><a href="http://www.hd315.gov.cn/beian/view.asp?bianhao=010202007080200026" target="_blank" rel="nofollow"><img data-lazyload="http://img10.360buyimg.com/da/20110329/108_40_zZOKnl.gif" width="108" height="40" alt="经营性网站备案中心"></a><script type="text/JavaScript">function CNNIC_change(eleId){var str= document.getElementById(eleId).href;var str1 =str.substring(0,(str.length-6));str1+=CNNIC_RndNum(6); document.getElementById(eleId).href=str1;}function CNNIC_RndNum(k){var rnd=""; for (var i=0;i < k;i++) rnd+=Math.floor(Math.random()*10); return rnd;}</script><a href="https://ss.cnnic.cn/verifyseal.dll?sn=2008070300100000031&ct=df&pa=294005" tabindex="-1" id="urlknet" target="_blank" rel="nofollow"><img alt="&#x53EF;&#x4FE1;&#x7F51;&#x7AD9;" name="CNNIC_seal" border="true" data-lazyload="http://img11.360buyimg.com/da/g8/M03/0C/0E/rBEHaFCFC5QIAAAAAAASVQX9RAYAACb2wHUV1kAABJt760.gif" width="108" height="40" oncontextmenu="return false;" onclick="CNNIC_change('urlknet')" /></a><a href="http://www.bj.cyberpolice.cn/index.do" target="_blank" rel="nofollow"><img data-lazyload="http://img12.360buyimg.com/da/g5/M02/0D/17/rBEIDE_nzcIIAAAAAAB30mYXo5QAACrhACj22IAAHfq378.png" width="108" height="40" alt="朝阳网络警察"></a><a href="https://search.szfw.org/cert/l/CX20120111001803001836" target="_blank" rel="nofollow"><img data-lazyload="http://img13.360buyimg.com/da/20120221/112_40_WvArIl.png" width="112" height="40"></a></div>
+    </div>
+</div><!-- footer end -->
+
+<script type="text/javascript">(function(){var hotwords="<strong>热门搜索：</strong><a href='http://search.360buy.com/Search?keyword=%E6%B2%99%E6%BC%A0%E9%A3%8E%E6%9A%B4&enc=utf-8' target='_blank' style='color: #CC0000'>沙漠风暴</a><a href='http://search.360buy.com/Search?keyword=尼康S5100' target='_blank'>尼康S5100</a><a href='http://search.360buy.com/Search?keyword=三星I8250'target='_blank'>三星I8250</a><a href=http://search.360buy.com/Search?keyword=%E5%8F%B0%E7%94%B5%20P85&enc=utf-8&area=1' target='_blank'>台电 P85</a><a href='http://search.360buy.com/Search?keyword=诺基亚 808' target='_blank'>诺基亚 808</a><a href='http://search.360buy.com/Search?keyword=RCA播放器' target='_blank'>RCA播放器</a><a href='http://search.360buy.com/Search?keyword=中兴 U970' target='_blank'>中兴 U970</a><a href='http://search.360buy.com/Search?keyword=三星I569' target='_blank'>三星I569</a><a href='http://search.360buy.com/Search?keyword=i5508' target='_blank'>i5508</a><a href='http://search.360buy.com/Search?keyword=C6' target='_blank'>C6</a>";
+    var keywords="One xc";
+    $("#hotwords").html(hotwords);
+    $("#key").val(keywords).bind("focus",function(){
+        if (this.value==keywords){this.value="";this.style.color="#333"}
+    }).bind("blur",function(){
+                if (this.value==""){this.value=keywords;this.style.color="#999"}
+            });
+})();
+</script>
+<script type="text/javascript" src="http://misc.360buyimg.com/lib/js/2012/lib-v1.js?t=20120809"></script>
+<script type="text/javascript">$("#filter .type").hoverForIE6();</script>
+<script type="text/javascript">$.jdCalcul([537]);</script>
+<script type="text/javascript">pageConfig.FN_InitContrast();</script>
+<script type="text/javascript" src="http://misc.360buyimg.com/201007/js/p.plist20121206.js"></script>
+<script type="text/javascript" src="http://misc.360buyimg.com/201007/js/list.recommend.js" ></script>
+<script type="text/javascript" src="http://misc.360buyimg.com/product/js/2012/footprint.js"></script>
+<script type="text/javascript">
+    (function(){
+        var ref=document.referrer;
+        if(ref && ref.indexOf("jd.com")==-1 && ref.indexOf("360buy.com")==-1 ){
+            ListRecP(866);
+        }
+    })();
+    function feed_publish_collect(type,wid){jQuery.getJSON("http://i.360buy.com/feed/send.action?type="+type+"&commodityId="+wid+"&jsoncallback=?",function(json){})}
+    if($("#hotsale").length>0){log('thirdtype', 'showhotsale_M');}
+</script>
+<script type="text/javascript">
+    var sidePanle=new pageConfig.FN_InitSidebar();
+    sidePanle.addItem("<a class='research' target='_blank' href='http://surveys.jd.com/index.php?r=survey/index/sid/73453/lang/zh-Hans'><b></b>调查问卷</a>")
+    sidePanle.setTop();
+    sidePanle.scroll();
+</script>
+<script type="text/javascript" src="http://fa.jd.com/loadFa.js?aid=2_145_766"></script>
+<script type="text/javascript" src="http://d.360buy.com/hotwords/get?position=A-digital-013"></script>
+<script type='text/javascript'>
+    //区域销售
+    var iplocation = {"1": { name: "北京", root: 0, djd: 1,c:72 },"2": { name: "上海", root: 1, djd: 1,c:78 },"3": { name: "天津", root: 0, djd: 1,c:51035 },"4": { name: "重庆", root: 3, djd: 1,c:113 },"5": { name: "河北", root: 0, djd: 1,c:142 },
+        "6": { name: "山西", root: 0, djd: 1,c:303 },"7": { name: "河南", root: 0, djd: 1,c:412 },"8": { name: "辽宁", root: 0, djd: 1,c:560 },"9": { name: "吉林", root: 0, djd: 1,c:639 },"10": { name: "黑龙江", root: 0, djd: 1,c:698 },
+        "11": { name: "内蒙古", root: 0, djd: 0,c:799 },"12": { name: "江苏", root: 1, djd: 1,c:904 },"13": { name: "山东", root: 0, djd: 1,c:1000 },"14": { name: "安徽", root: 1, djd: 1,c:1116 },"15": { name: "浙江", root: 1, djd: 1,c:1158 },
+        "16": { name: "福建", root: 2, djd: 1,c:1303 },"17": { name: "湖北", root: 0, djd: 1,c:1381 },"18": { name: "湖南", root: 2, djd: 1,c:1482 },"19": { name: "广东", root: 2, djd: 1,c:1601 },"20": { name: "广西", root: 2, djd: 1,c:1715 },
+        "21": { name: "江西", root: 2, djd: 1,c:1827 },"22": { name: "四川", root: 3, djd: 1,c:1930 },"23": { name: "海南", root: 2, djd: 1,c:2121 },"24": { name: "贵州", root: 3, djd: 1,c:2144 },"25": { name: "云南", root: 3, djd: 1,c:2235 },
+        "26": { name: "西藏", root: 3, djd: 0,c:2951 },"27": { name: "陕西", root: 3, djd: 1,c:2376 },"28": { name: "甘肃", root: 3, djd: 1,c:2487 },"29": { name: "青海", root: 3, djd: 0,c:2580 },"30": { name: "宁夏", root: 3, djd: 1,c:2628 },
+        "31": { name: "新疆", root: 3, djd: 0,c:2652 },"32": { name: "台湾", root: 2, djd: 0,c:2768 },"42": { name: "香港", root: 2, djd: 0,c:2754 },"43": { name: "澳门", root: 2, djd: 0,c:2770 },"84": { name: "钓鱼岛", root: 2, djd: 0,c:84 }};
+    var provinceCityJson = {"1":[{"id":72,"name":"朝阳区"},{"id":2800,"name":"海淀区"},{"id":2801,"name":"西城区"},{"id":2802,"name":"东城区"},{"id":2803,"name":"崇文区"},{"id":2804,"name":"宣武区"},{"id":2805,"name":"丰台区"},{"id":2806,"name":"石景山区"},{"id":2807,"name":"门头沟"},{"id":2808,"name":"房山区"},{"id":2809,"name":"通州区"},{"id":2810,"name":"大兴区"},{"id":2812,"name":"顺义区"},{"id":2814,"name":"怀柔区"},{"id":2816,"name":"密云区"},{"id":2901,"name":"昌平区"},{"id":2953,"name":"平谷区"},{"id":3065,"name":"延庆县"}],"2":[{"id":2811,"name":"卢湾区"},{"id":2813,"name":"徐汇区"},{"id":2815,"name":"长宁区"},{"id":2817,"name":"静安区"},{"id":2820,"name":"闸北区"},{"id":2822,"name":"虹口区"},{"id":2823,"name":"杨浦区"},{"id":2824,"name":"宝山区"},{"id":2825,"name":"闵行区"},{"id":2826,"name":"嘉定区"},{"id":2830,"name":"浦东新区"},{"id":2833,"name":"青浦区"},{"id":2834,"name":"松江区"},{"id":2835,"name":"金山区"},{"id":2836,"name":"南汇区"},{"id":2837,"name":"奉贤区"},{"id":2841,"name":"普陀区"},{"id":2919,"name":"崇明县"},{"id":78,"name":"黄浦区"}],"3":[{"id":51035,"name":"东丽区"},{"id":51036,"name":"和平区"},{"id":51037,"name":"河北区"},{"id":51038,"name":"河东区"},{"id":51039,"name":"河西区"},{"id":51040,"name":"红桥区"},{"id":51041,"name":"蓟县"},{"id":51042,"name":"静海县"},{"id":51043,"name":"南开区"},{"id":51044,"name":"塘沽区"},{"id":51045,"name":"西青区"},{"id":51046,"name":"武清区"},{"id":51047,"name":"津南区"},{"id":51048,"name":"汉沽区"},{"id":51049,"name":"大港区"},{"id":51050,"name":"北辰区"},{"id":51051,"name":"宝坻区"},{"id":51052,"name":"宁河县"}],"4":[{"id":113,"name":"万州区"},{"id":114,"name":"涪陵区"},{"id":115,"name":"梁平县"},{"id":119,"name":"南川区"},{"id":123,"name":"潼南县"},{"id":126,"name":"大足区"},{"id":128,"name":"黔江区"},{"id":129,"name":"武隆县"},{"id":130,"name":"丰都县"},{"id":131,"name":"奉节县"},{"id":132,"name":"开县"},{"id":133,"name":"云阳县"},{"id":134,"name":"忠县"},{"id":135,"name":"巫溪县"},{"id":136,"name":"巫山县"},{"id":137,"name":"石柱县"},{"id":138,"name":"彭水县"},{"id":139,"name":"垫江县"},{"id":140,"name":"酉阳县"},{"id":141,"name":"秀山县"},{"id":48131,"name":"璧山县"},{"id":48132,"name":"荣昌县"},{"id":48133,"name":"铜梁县"},{"id":48201,"name":"合川区"},{"id":48202,"name":"巴南区"},{"id":48203,"name":"北碚区"},{"id":48204,"name":"江津区"},{"id":48205,"name":"渝北区"},{"id":48206,"name":"长寿区"},{"id":48207,"name":"永川区"},{"id":50950,"name":"江北区"},{"id":50951,"name":"南岸区"},{"id":50952,"name":"九龙坡区"},{"id":50953,"name":"沙坪坝区"},{"id":50954,"name":"大渡口区"},{"id":50995,"name":"綦江区"},{"id":51026,"name":"渝中区"},{"id":51027,"name":"高新区"},{"id":51028,"name":"北部新区"},{"id":4164,"name":"城口县"},{"id":3076,"name":"高新区"}],"5":[{"id":142,"name":"石家庄市"},{"id":148,"name":"邯郸市"},{"id":164,"name":"邢台市"},{"id":199,"name":"保定市"},{"id":224,"name":"张家口市"},{"id":239,"name":"承德市"},{"id":248,"name":"秦皇岛市"},{"id":258,"name":"唐山市"},{"id":264,"name":"沧州市"},{"id":274,"name":"廊坊市"},{"id":275,"name":"衡水市"}],"6":[{"id":303,"name":"太原市"},{"id":309,"name":"大同市"},{"id":318,"name":"阳泉市"},{"id":325,"name":"晋城市"},{"id":330,"name":"朔州市"},{"id":336,"name":"晋中市"},{"id":350,"name":"忻州市"},{"id":368,"name":"吕梁市"},{"id":379,"name":"临汾市"},{"id":398,"name":"运城市"},{"id":3074,"name":"长治市"}],"7":[{"id":412,"name":"郑州市"},{"id":420,"name":"开封市"},{"id":427,"name":"洛阳市"},{"id":438,"name":"平顶山市"},{"id":446,"name":"焦作市"},{"id":454,"name":"鹤壁市"},{"id":458,"name":"新乡市"},{"id":468,"name":"安阳市"},{"id":475,"name":"濮阳市"},{"id":482,"name":"许昌市"},{"id":489,"name":"漯河市"},{"id":495,"name":"三门峡市"},{"id":502,"name":"南阳市"},{"id":517,"name":"商丘市"},{"id":527,"name":"周口市"},{"id":538,"name":"驻马店市"},{"id":549,"name":"信阳市"},{"id":2780,"name":"济源市"}],"8":[{"id":560,"name":"沈阳市"},{"id":573,"name":"大连市"},{"id":579,"name":"鞍山市"},{"id":584,"name":"抚顺市"},{"id":589,"name":"本溪市"},{"id":593,"name":"丹东市"},{"id":598,"name":"锦州市"},{"id":604,"name":"葫芦岛市"},{"id":609,"name":"营口市"},{"id":613,"name":"盘锦市"},{"id":617,"name":"阜新市"},{"id":621,"name":"辽阳市"},{"id":632,"name":"朝阳市"},{"id":6858,"name":"铁岭市"}],"9":[{"id":639,"name":"长春市"},{"id":644,"name":"吉林市"},{"id":651,"name":"四平市"},{"id":2992,"name":"辽源市"},{"id":657,"name":"通化市"},{"id":664,"name":"白山市"},{"id":674,"name":"松原市"},{"id":681,"name":"白城市"},{"id":687,"name":"延边州"}],"10":[{"id":727,"name":"鹤岗市"},{"id":731,"name":"双鸭山市"},{"id":737,"name":"鸡西市"},{"id":742,"name":"大庆市"},{"id":753,"name":"伊春市"},{"id":757,"name":"牡丹江市"},{"id":765,"name":"佳木斯市"},{"id":773,"name":"七台河市"},{"id":776,"name":"黑河市"},{"id":782,"name":"绥化市"},{"id":793,"name":"大兴安岭地区"},{"id":698,"name":"哈尔滨市"},{"id":712,"name":"齐齐哈尔市"}],"11":[{"id":799,"name":"呼和浩特市"},{"id":805,"name":"包头市"},{"id":810,"name":"乌海市"},{"id":812,"name":"赤峰市"},{"id":823,"name":"乌兰察布市"},{"id":835,"name":"锡林郭勒盟"},{"id":848,"name":"呼伦贝尔市"},{"id":870,"name":"鄂尔多斯市"},{"id":880,"name":"巴彦淖尔市"},{"id":891,"name":"阿拉善盟"},{"id":895,"name":"兴安盟"},{"id":902,"name":"通辽市"}],"12":[{"id":904,"name":"南京市"},{"id":911,"name":"徐州市"},{"id":919,"name":"连云港市"},{"id":925,"name":"淮安市"},{"id":933,"name":"宿迁市"},{"id":939,"name":"盐城市"},{"id":951,"name":"扬州市"},{"id":959,"name":"泰州市"},{"id":965,"name":"南通市"},{"id":972,"name":"镇江市"},{"id":978,"name":"常州市"},{"id":984,"name":"无锡市"},{"id":988,"name":"苏州市"}],"13":[{"id":2900,"name":"济宁市"},{"id":1000,"name":"济南市"},{"id":1007,"name":"青岛市"},{"id":1016,"name":"淄博市"},{"id":1022,"name":"枣庄市"},{"id":1025,"name":"东营市"},{"id":1032,"name":"潍坊市"},{"id":1042,"name":"烟台市"},{"id":1053,"name":"威海市"},{"id":1058,"name":"莱芜市"},{"id":1060,"name":"德州市"},{"id":1072,"name":"临沂市"},{"id":1081,"name":"聊城市"},{"id":1090,"name":"滨州市"},{"id":1099,"name":"菏泽市"},{"id":1108,"name":"日照市"},{"id":1112,"name":"泰安市"}],"14":[{"id":1151,"name":"黄山市"},{"id":1159,"name":"滁州市"},{"id":1167,"name":"阜阳市"},{"id":1174,"name":"亳州市"},{"id":1180,"name":"宿州市"},{"id":1201,"name":"池州市"},{"id":1206,"name":"六安市"},{"id":2971,"name":"宣城市"},{"id":1114,"name":"铜陵市"},{"id":1116,"name":"合肥市"},{"id":1121,"name":"淮南市"},{"id":1124,"name":"淮北市"},{"id":1127,"name":"芜湖市"},{"id":1132,"name":"蚌埠市"},{"id":1137,"name":"马鞍山市"},{"id":1140,"name":"安庆市"}],"15":[{"id":1158,"name":"宁波市"},{"id":1273,"name":"衢州市"},{"id":1280,"name":"丽水市"},{"id":1290,"name":"台州市"},{"id":1298,"name":"舟山市"},{"id":1213,"name":"杭州市"},{"id":1233,"name":"温州市"},{"id":1243,"name":"嘉兴市"},{"id":1250,"name":"湖州市"},{"id":1255,"name":"绍兴市"},{"id":1262,"name":"金华市"}],"16":[{"id":1303,"name":"福州市"},{"id":1315,"name":"厦门市"},{"id":1317,"name":"三明市"},{"id":1329,"name":"莆田市"},{"id":1332,"name":"泉州市"},{"id":1341,"name":"漳州市"},{"id":1352,"name":"南平市"},{"id":1362,"name":"龙岩市"},{"id":1370,"name":"宁德市"}],"17":[{"id":1432,"name":"孝感市"},{"id":1441,"name":"黄冈市"},{"id":1458,"name":"咸宁市"},{"id":1466,"name":"恩施州"},{"id":1475,"name":"鄂州市"},{"id":1477,"name":"荆门市"},{"id":1479,"name":"随州市"},{"id":3154,"name":"神农架林区"},{"id":1381,"name":"武汉市"},{"id":1387,"name":"黄石市"},{"id":1396,"name":"襄阳市"},{"id":1405,"name":"十堰市"},{"id":1413,"name":"荆州市"},{"id":1421,"name":"宜昌市"},{"id":2922,"name":"潜江市"},{"id":2980,"name":"天门市"},{"id":2983,"name":"仙桃市"}],"18":[{"id":4250,"name":"耒阳市"},{"id":1482,"name":"长沙市"},{"id":1488,"name":"株洲市"},{"id":1495,"name":"湘潭市"},{"id":1499,"name":"韶山市"},{"id":1501,"name":"衡阳市"},{"id":1511,"name":"邵阳市"},{"id":1522,"name":"岳阳市"},{"id":1530,"name":"常德市"},{"id":1540,"name":"张家界市"},{"id":1544,"name":"郴州市"},{"id":1555,"name":"益阳市"},{"id":1560,"name":"永州市"},{"id":1574,"name":"怀化市"},{"id":1586,"name":"娄底市"},{"id":1592,"name":"湘西州"}],"19":[{"id":1601,"name":"广州市"},{"id":1607,"name":"深圳市"},{"id":1609,"name":"珠海市"},{"id":1611,"name":"汕头市"},{"id":1617,"name":"韶关市"},{"id":1627,"name":"河源市"},{"id":1634,"name":"梅州市"},{"id":1709,"name":"揭阳市"},{"id":1643,"name":"惠州市"},{"id":1650,"name":"汕尾市"},{"id":1655,"name":"东莞市"},{"id":1657,"name":"中山市"},{"id":1659,"name":"江门市"},{"id":1666,"name":"佛山市"},{"id":1672,"name":"阳江市"},{"id":1677,"name":"湛江市"},{"id":1684,"name":"茂名市"},{"id":1690,"name":"肇庆市"},{"id":1698,"name":"云浮市"},{"id":1704,"name":"清远市"},{"id":1705,"name":"潮州市"}],"20":[{"id":3168,"name":"崇左市"},{"id":1715,"name":"南宁市"},{"id":1720,"name":"柳州市"},{"id":1726,"name":"桂林市"},{"id":1740,"name":"梧州市"},{"id":1746,"name":"北海市"},{"id":1749,"name":"防城港市"},{"id":1753,"name":"钦州市"},{"id":1757,"name":"贵港市"},{"id":1761,"name":"玉林市"},{"id":1792,"name":"贺州市"},{"id":1806,"name":"百色市"},{"id":1818,"name":"河池市"},{"id":3044,"name":"来宾市"}],"21":[{"id":1827,"name":"南昌市"},{"id":1832,"name":"景德镇市"},{"id":1836,"name":"萍乡市"},{"id":1842,"name":"新余市"},{"id":1845,"name":"九江市"},{"id":1857,"name":"鹰潭市"},{"id":1861,"name":"上饶市"},{"id":1874,"name":"宜春市"},{"id":1885,"name":"抚州市"},{"id":1898,"name":"吉安市"},{"id":1911,"name":"赣州市"}],"22":[{"id":2103,"name":"凉山州"},{"id":1930,"name":"成都市"},{"id":1946,"name":"自贡市"},{"id":1950,"name":"攀枝花市"},{"id":1954,"name":"泸州市"},{"id":1960,"name":"绵阳市"},{"id":1962,"name":"德阳市"},{"id":1977,"name":"广元市"},{"id":1983,"name":"遂宁市"},{"id":1988,"name":"内江市"},{"id":1993,"name":"乐山市"},{"id":2005,"name":"宜宾市"},{"id":2016,"name":"广安市"},{"id":2022,"name":"南充市"},{"id":2033,"name":"达州市"},{"id":2042,"name":"巴中市"},{"id":2047,"name":"雅安市"},{"id":2058,"name":"眉山市"},{"id":2065,"name":"资阳市"},{"id":2070,"name":"阿坝州"},{"id":2084,"name":"甘孜州"}],"23":[{"id":3690,"name":"三亚市"},{"id":3698,"name":"文昌市"},{"id":3699,"name":"五指山市"},{"id":3701,"name":"临高县"},{"id":3702,"name":"澄迈县"},{"id":3703,"name":"定安县"},{"id":3704,"name":"屯昌县"},{"id":3705,"name":"昌江县"},{"id":3706,"name":"白沙县"},{"id":3707,"name":"琼中县"},{"id":3708,"name":"陵水县"},{"id":3709,"name":"保亭县"},{"id":3710,"name":"乐东县"},{"id":3711,"name":"三沙市"},{"id":2121,"name":"海口市"},{"id":3115,"name":"琼海市"},{"id":3137,"name":"万宁市"},{"id":3173,"name":"东方市"},{"id":3034,"name":"儋州市"}],"24":[{"id":2144,"name":"贵阳市"},{"id":2150,"name":"六盘水市"},{"id":2155,"name":"遵义市"},{"id":2169,"name":"铜仁市"},{"id":2180,"name":"毕节市"},{"id":2189,"name":"安顺市"},{"id":2196,"name":"黔西南州"},{"id":2205,"name":"黔东南州"},{"id":2222,"name":"黔南州"}],"25":[{"id":4108,"name":"迪庆州"},{"id":2235,"name":"昆明市"},{"id":2247,"name":"曲靖市"},{"id":2258,"name":"玉溪市"},{"id":2270,"name":"昭通市"},{"id":2281,"name":"普洱市"},{"id":2291,"name":"临沧市"},{"id":2298,"name":"保山市"},{"id":2304,"name":"丽江市"},{"id":2309,"name":"文山州"},{"id":2318,"name":"红河州"},{"id":2332,"name":"西双版纳州"},{"id":2336,"name":"楚雄州"},{"id":2347,"name":"大理州"},{"id":2360,"name":"德宏州"},{"id":2366,"name":"怒江州"}],"26":[{"id":3970,"name":"阿里地区"},{"id":3971,"name":"林芝地区"},{"id":2951,"name":"拉萨市"},{"id":3107,"name":"那曲地区"},{"id":3129,"name":"山南地区"},{"id":3138,"name":"昌都地区"},{"id":3144,"name":"日喀则地区"}],"27":[{"id":2428,"name":"延安市"},{"id":2442,"name":"汉中市"},{"id":2454,"name":"榆林市"},{"id":2468,"name":"商洛市"},{"id":2476,"name":"安康市"},{"id":2376,"name":"西安市"},{"id":2386,"name":"铜川市"},{"id":2390,"name":"宝鸡市"},{"id":2402,"name":"咸阳市"},{"id":2416,"name":"渭南市"}],"28":[{"id":2525,"name":"庆阳市"},{"id":2534,"name":"陇南市"},{"id":2544,"name":"武威市"},{"id":2549,"name":"张掖市"},{"id":2556,"name":"酒泉市"},{"id":2564,"name":"甘南州"},{"id":2573,"name":"临夏州"},{"id":3080,"name":"定西市"},{"id":2487,"name":"兰州市"},{"id":2492,"name":"金昌市"},{"id":2495,"name":"白银市"},{"id":2501,"name":"天水市"},{"id":2509,"name":"嘉峪关市"},{"id":2518,"name":"平凉市"}],"29":[{"id":2580,"name":"西宁市"},{"id":2585,"name":"海东地区"},{"id":2592,"name":"海北州"},{"id":2597,"name":"黄南州"},{"id":2603,"name":"海南州"},{"id":2605,"name":"果洛州"},{"id":2612,"name":"玉树州"},{"id":2620,"name":"海西州"}],"30":[{"id":2628,"name":"银川市"},{"id":2632,"name":"石嘴山市"},{"id":2637,"name":"吴忠市"},{"id":2644,"name":"固原市"},{"id":3071,"name":"中卫市"}],"31":[{"id":4110,"name":"五家渠市"},{"id":4163,"name":"博尔塔拉蒙古自治州阿拉山口口岸"},{"id":15945,"name":"阿拉尔市"},{"id":15946,"name":"图木舒克市"},{"id":2652,"name":"乌鲁木齐市"},{"id":2654,"name":"克拉玛依市"},{"id":2656,"name":"石河子市"},{"id":2658,"name":"吐鲁番地区"},{"id":2662,"name":"哈密地区"},{"id":2666,"name":"和田地区"},{"id":2675,"name":"阿克苏地区"},{"id":2686,"name":"喀什地区"},{"id":2699,"name":"克孜勒苏州"},{"id":2704,"name":"巴音郭楞州"},{"id":2714,"name":"昌吉州"},{"id":2723,"name":"博尔塔拉州"},{"id":2727,"name":"伊犁州"},{"id":2736,"name":"塔城地区"},{"id":2744,"name":"阿勒泰地区"}],"32":[{"id":2768,"name":"台湾市"}],"42":[{"id":2754,"name":"香港特别行政区"}],"43":[{"id":2770,"name":"澳门市"}],"84":[{"id":1310,"name":"钓鱼岛"}]};
+
+
+    var selectedProvinceId,selectedCityId,selectedAreaId,selectedProvinceId,selectedCityName,selectedAreaName;
+
+    function getAreaStoreUrl(areaId){
+        urlArr[14] = selectedProvinceId;
+        urlArr[15] = selectedCityId;
+        urlArr[16] = areaId;
+
+        if(paras[1]==6880||paras[2]==655){  //paras[1]==794||
+            urlArr[17] = "33";
+        }
+
+        var url = urlArr.join('-');
+
+        url += ".html";
+
+        return url;
+    }
+
+    function selectStoreTab(index) {
+        if(index == 0) {
+            $('dl.store div.mt li').eq(0).find('em').text('请选择');
+            $('dl.store div.mt li').eq(1).addClass('hide').find('em').text("请选择");
+            $('dl.store div.mt li').eq(2).addClass('hide').find('em').text("请选择");;
+            $('dl.store [data-widget=tab-item]').eq(0).addClass('curr');
+            $('dl.store [data-area="0"]').removeClass('hide');
+            $('dl.store [data-area="1"]').addClass('hide');
+            $('dl.store [data-area="2"]').addClass('hide');
+
+        } else if(index == 1) {
+            $('dl.store [data-widget=tab-item]').eq(1).addClass('curr').find('em').text('请选择');
+
+            $('dl.store [data-area="1"]').removeClass('hide');
+
+            $('dl.store div.mt li').eq(2).addClass('hide').find('em').text('请选择');
+            $('dl.store [data-area="2"]').addClass('hide');
+
+        } else if(index == 2) {
+        }
+    }
+
+    function getAreaList_callback(data){
+        $('dl.store div[data-area="1"]').addClass('hide');
+        $('dl.store div[data-area="2"]').removeClass('hide');
+        $('dl.store div[data-area="2"] p.ac').addClass('hide');
+
+
+        var thirdTabPanel = $('dl.store div.mc[data-area="2"] ul').empty();
+        var areaStr="",
+            areaLongStr="",
+            areaLongerStr="";
+
+        for(var i = 0;i < data.length; i++){
+            var item = data[i];
+            var name = item['name'];
+            var url = getAreaStoreUrl(item['id']);
+            if(name.length <= 5){
+                areaStr += "<li><a data-value='" + item['id'] + "' href='" + url + "'>" + item['name'] + "</a></li>";
+            }else if(name.length <= 11){
+                areaLongStr += "<li class='long-area'><a data-value='" + item['id'] + "' href='" + url + "'>" + item['name'] + "</a></li>";
+            } else  {
+                areaLongerStr += "<li class='longer-area'><a data-value='" + item['id'] + "' href='" + url + "'>" + item['name'] + "</a></li>";
+            }
+        }
+
+        thirdTabPanel.append(areaStr + areaLongStr + areaLongerStr);
+    }
+
+
+    function selectProvince(parentId,name){
+
+        selectedProvinceId = parentId;
+        $('dl.store [data-widget=tab-item]').eq(0).removeClass('curr');
+        $('dl.store [data-widget=tab-item]').eq(0).find('em').text(name);
+        $('dl.store [data-widget=tab-item]').eq(1).removeClass('hide').addClass('curr');
+        $('dl.store [data-area="0"]').addClass('hide');
+        $('dl.store [data-area="1"]').removeClass('hide');
+        $('dl.store [data-area="1"] p.ac').addClass('hide');
+
+
+        var secondTabPanel = $('dl.store div.mc[data-area="1"] ul').empty();
+        var thirdTabPanel = $('dl.store div.mc[data-area="2"] ul').empty();
+        $('dl.store [data-area="2"] p.ac').removeClass('hide');
+
+
+        var selectCityArray = provinceCityJson[parentId];
+        var areaStr="",
+            areaLongStr="",
+            areaLongerStr="";
+        for (var i=0; i < selectCityArray.length; i++) {
+            var name = selectCityArray[i]['name'];
+            var id = selectCityArray[i]['id'];
+
+            if(name.length <= 5){
+                areaStr += "<li><a data-value='" + id + "' href='#none' onclick='selectCity(" + id + ",\"" + name + "\")'>" + name + "</a></li>";
+            } else if( name.length <= 11 ) {
+                areaLongStr += "<li class='long-area'><a data-value='" + id + "' onclick='selectCity(" + id +  ",\"" + name + "\")' href='#none'>" + name + "</a></li>";
+            }else {
+                areaLongerStr += "<li class='longer-area'><a data-value='" + id + "' onclick='selectCity(" + id +  ",\"" + name + "\")' href='#none'>" + name + "</a></li>";
+            }
+        }
+
+        secondTabPanel.append(areaStr + areaLongStr + areaLongerStr);
+    }
+
+    function selectCity(parentId,name) {
+        selectedCityId = parentId;
+
+        $('dl.store [data-widget=tab-item]').eq(1).removeClass('curr');
+        $('dl.store [data-widget=tab-item]').eq(1).find('em').text(name);
+        $('dl.store [data-widget=tab-item]').eq(2).removeClass('hide').addClass('curr');
+
+
+
+
+        $.ajax({
+            url:'http://d.360buy.com/area/get?fid=' + parentId + '&callback=getAreaList_callback',
+            dataType:'jsonp'
+        });
+    }
+
+
+    function getAreaName_callback(data){
+        for(var i = 0;i < data.length; i++){
+            var item = data[i];
+            if(item['id'] == selectedAreaId) {
+                selectedAreaName = item['name'];
+                break;
+            }
+
+        }
+
+        if(!selectedAreaName) {
+            selectedAreaId = data[0]['id'];
+            selectedAreaName = data[0]['name'];
+        }
+
+        $('dl.store [data-widget=tab-item]').eq(2).find('em').text(selectedAreaName);
+
+        if(selectedProvinceName&&selectedCityName&&selectedAreaName){
+            $('#store-selector div.text').html(selectedProvinceName + selectedCityName + selectedAreaName + "<b></b>");
+            jd.plist.cookieEditer.setCookie("ipLoc-djd", selectedProvinceId + "-" + selectedCityId + "-" + selectedAreaId,30, "/", domainName, false);
+
+            refreshPrice( selectedProvinceId + "-" + selectedCityId + "-" + selectedAreaId );
+        } else {
+
+            jd.plist.cookieEditer.setCookie("ipLoc-djd", "1-72-4137",30, "/", domainName, false);
+
+        }
+        get_stock();
+    }
+
+
+    (function(){
+
+        $('#store-selector div.text').bind('mouseover',function(){
+           $('#store-selector').addClass('hover');
+        });
+
+        $('body').click(function(g) {
+            var d = g.srcElement || g.target,
+                    connectDom = [$('#store-selector').get(0)];
+            while (d) {
+                for (var f = 0; f < connectDom.length; f++) {
+                    if (d == connectDom[f]) {
+                        return
+                    }
+                }
+                if (d === document.body) {
+                    $('#store-selector').removeClass('hover');
+                    return
+                }
+                d = d.parentNode;
+            }
+        })
+
+
+        selectedProvinceId = urlArr[14];
+        selectedCityId = urlArr[15];
+        selectedAreaId = urlArr[16];
+        selectedProvinceName = iplocation[selectedProvinceId]['name'];
+
+        if( !selectedProvinceName ){
+            selectedProvinceName = iplocation[1]['name'];
+            selectedProvinceId = 1;
+        }
+
+
+        var citysInProvince = provinceCityJson[selectedProvinceId];
+        for(var i = 0; i < citysInProvince.length; i++) {
+            if(selectedCityId == citysInProvince[i]['id']) {
+                selectedCityName =  citysInProvince[i]['name'];
+                break;
+            }
+        }
+        if( !selectedCityName ){
+            selectedCityName = citysInProvince[0]['name'];
+            selectedCityId = citysInProvince[0]['id'];
+        }
+
+
+        selectProvince(selectedProvinceId,selectedProvinceName);
+        selectCity(selectedCityId,selectedCityName);
+
+        $.getJSONP('http://d.360buy.com/area/get?fid=' + selectedCityId + '&callback=getAreaName_callback');
+
+
+
+        var firstTabPanel = $('dl.store div.mc[data-area="0"] ul');
+        for(var id in iplocation) {
+            var name = iplocation[id]['name'];
+            if(name.length <= 4){
+                firstTabPanel.append("<li><a data-value='" + id + "' href='#none' onclick='selectProvince(" + id + ",\"" + name + "\")'>" + name + "</a></li>");
+            } else {
+                firstTabPanel.append("<li class='long-area'><a data-value='" + id + "' onclick='selectProvince(" + id + ",\"" + name + "\")' href='#none'>" + name + "</a></li>");
+            }
+        }
+
+
+    })();
+
+
+    //库存信息
+
+
+
+    function get_stock_cb(json) {
+        if( !json || typeof json!='object' ) { return; }
+        var el_infos = $('div.stocklist[stock]'),stock= selectedProvinceId + '-' + selectedCityId + '-' + selectedAreaId, city= iplocation[selectedProvinceId]['name'] ||'';
+        for( var i=0,l=el_infos.length; i<l; i++ ) {
+            var el_info=el_infos.eq(i);
+            var wid =el_info.attr('stock'), info = json[wid], class_name='btn btn-nostore notice-store', el_btn = el_info.parent().find('a.btn-buy');
+
+            if( !info ) { continue; }
+
+
+            switch( info['stockvalue'] & 0xffff ) {
+                case 0  :
+                case 18 :
+                case 34 :
+
+                    el_btn.attr({'href':'javascript:;','class':class_name,'data-type':2,'data-sku':wid,'id':'store'+wid}).removeAttr('target').html('<b></b>到货通知');
+                    el_info && el_info.html('<span class="st34">'+city+'无货</span>');
+                    break;
+                case 36 :
+                    el_info && el_info.html('<span class="st36">'+city+'预定</span>');
+                    break;
+                case 40 :
+                    el_info && el_info.html('<span class="st40">'+city+'有货 <b>下单后2-6天发货</b></span>');
+                    break;
+                default : break;
+            }
+        }
+    }
+    function get_stock() {
+        var el = $('a[stock]'),stock=readCookie('ipLoc-djd');
+        if(!stock) {return;} stock = stock.split('-').slice(0,3).join('_');
+        var skuids = jdwsment.skuids;
+        $.getJSONP('http://search.jd.com/stock?skus='+encodeURIComponent(skuids)+'&district=' + urlArr[14]  + '_' + urlArr[15] + '_' + urlArr[16] +  '&callback=get_stock_cb');
+    }
+
+
+
+</script>
+<script  type="text/javascript">
+    (function(){
+        var loc = jd.plist.cookieEditer.getCookie("ipLoc-djd");
+        $.ajax({url:'http://uprofile.jd.com/u/setadds',type:'get',dataType:'jsonp',data:{adds:loc}});
+    })();
+</script>
+<script type="text/javascript" src="http://wl.jd.com/wl.js"></script>
+<script type="text/javascript">
+    var _mvq = _mvq || [];
+    _mvq.push(['$setAccount', 'm-9-1']);
+    _mvq.push(['$logConversion']);
+    (function() {
+        var mvl = document.createElement('script');
+        mvl.type = 'text/javascript'; mvl.async = true;
+        mvl.src = 'http://misc.360buyimg.com/lib/js/2012/mvl.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(mvl, s);
+    })();
+
+
+
+    $(function() {
+
+
+        $('div#plist').find('li').bind('click',function(){
+
+            var skuId = $(this).attr('sku')
+            var index = $(this).attr('index');
+            JA && JA.tracker.ngloader('list.010002',{cid1:psid1,cid2:psid2,cid3:psid3,sku:skuId,index:index});
+        });
+
+        JA && JA.tracker.ngloader('list.010001',{cid1:psid1,cid2:psid2,cid3:psid3});
+
+
+    });
+
+</script>
+
+
+<script type="text/javascript">
+    var brand = null;
+    if(urlArr[3] && urlArr[3] != "0"){
+        brand = urlArr[3]
+    }
+    var google_tag_params = {
+        ecomm_prodid:null,
+        ecomm_pagetype:"category",
+        ecomm_pname:null,
+        ecomm_pcat:psid1+"|"+psid2+"|"+psid3,
+        ecomm_pvalues:null,
+        ecomm_pbrand:brand
+    };
+</script>
+<script type="text/javascript">
+    dataLayer = [{
+        'google_tag_params': window.google_tag_params
+    }];
+</script>
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-T947SH" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<script>
+    (function(w,d,s,l,i){
+        w[l]=w[l]||[];
+        w[l].push({
+            'gtm.start': new Date().getTime(),
+            event:'gtm.js'
+        });
+        var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+            j.async=true;
+            j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;
+            f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T947SH');
+</script>
+<!-- End Google Tag Manager -->
+
+
+
+</body>
+</html>

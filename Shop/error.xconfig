@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <handler id="1">
+    <fault type="1" isflag="true">
+      <enum key="0x8000"><![CDATA[直流电流过流]]></enum>
+      <enum key="0x4000"><![CDATA[C相输出过流]]></enum>
+      <enum key="0x2000"><![CDATA[B相输出过流]]></enum>
+      <enum key="0x1000"><![CDATA[A相输出过流]]></enum>
+      <enum key="0x0800"><![CDATA[C相桥臂过流]]></enum>
+      <enum key="0x0400"><![CDATA[B相桥臂过流]]></enum>
+      <enum key="0x0200"><![CDATA[A相桥臂过流]]></enum>
+      <enum key="0x0010"><![CDATA[急停开关]]></enum>
+      <enum key="0x0008"><![CDATA[直流电压过压]]></enum>
+      <enum key="0x0004"><![CDATA[2号逆变柜C相桥臂过温]]></enum>
+      <enum key="0x0002"><![CDATA[2号逆变柜B相桥臂过温]]></enum>
+      <enum key="0x0001"><![CDATA[2号逆变柜A相桥臂过温]]></enum>
+    </fault>
+    <fault type="2" isflag="false">
+      <enum key="19"><![CDATA[直流电压过低]]></enum>
+      <enum key="20"><![CDATA[直流电压低]]></enum>
+      <enum key="21"><![CDATA[电网电压过低]]></enum>
+      <enum key="22"><![CDATA[电网电压过高]]></enum>
+      <enum key="23"><![CDATA[电网频率过低]]></enum>
+      <enum key="24"><![CDATA[电网频率过高]]></enum>
+      <enum key="25"><![CDATA[电网故障造成电压升高]]></enum>
+      <enum key="26"><![CDATA[逆变器输出功率过低]]></enum>
+      <enum key="27"><![CDATA[并网点断开]]></enum>
+      <enum key="28"><![CDATA[孤岛保护]]></enum>
+      <enum key="29"><![CDATA[预充电故障]]></enum>
+      <enum key="30"><![CDATA[主接触器故障]]></enum>
+      <enum key="31"><![CDATA[并网接触器故障]]></enum>
+    </fault>
+  </handler>
+  <handler id="2">
+    <fault type="1" isflag="false">
+      <enum key="10"><![CDATA[控制故障]]></enum>
+      <enum key="11"><![CDATA[控制故障]]></enum>
+      <enum key="12"><![CDATA[控制故障]]></enum>
+      <enum key="20"><![CDATA[直流接触器故障]]></enum>
+      <enum key="21"><![CDATA[光伏电压过高]]></enum>
+      <enum key="22"><![CDATA[光伏电压过低]]></enum>
+      <enum key="23"><![CDATA[光伏电压反接]]></enum>
+      <enum key="24"><![CDATA[光伏电流过高]]></enum>
+      <enum key="25"><![CDATA[光伏侧电流检测故障]]></enum>
+      <enum key="26"><![CDATA[接触器故障]]></enum>
+      <enum key="30"><![CDATA[交流接触器故障]]></enum>
+      <enum key="31"><![CDATA[交流电流过高]]></enum>
+      <enum key="32"><![CDATA[交流电压过高]]></enum>
+      <enum key="33"><![CDATA[交流电压过低]]></enum>
+      <enum key="34"><![CDATA[三相交流相位错误]]></enum>
+      <enum key="35"><![CDATA[交流频率过高]]></enum>
+      <enum key="36"><![CDATA[交流频率过低]]></enum>
+      <enum key="37"><![CDATA[交流电压过高]]></enum>
+      <enum key="38"><![CDATA[交流侧电流检测故障]]></enum>
+      <enum key="39"><![CDATA[交流侧电压不平衡]]></enum>
+      <enum key="40"><![CDATA[硬件保护故障]]></enum>
+      <enum key="41"><![CDATA[光伏电流过高硬件保护]]></enum>
+      <enum key="42"><![CDATA[光伏电压过低硬件保护]]></enum>
+      <enum key="43"><![CDATA[光伏电压过高硬件保护]]></enum>
+      <enum key="44"><![CDATA[光伏电流过高硬件保护]]></enum>
+      <enum key="45"><![CDATA[散热器温度过高硬件保护]]></enum>
+      <enum key="46"><![CDATA[半导体器件温度过高硬件保护]]></enum>
+      <enum key="47"><![CDATA[电抗器温度过高硬件保护]]></enum>
+      <enum key="48"><![CDATA[变压器温度过高硬件保护]]></enum>
+      <enum key="50"><![CDATA[半导体器件温度过高]]></enum>
+      <enum key="51"><![CDATA[散热器温度过高]]></enum>
+      <enum key="52"><![CDATA[变压器温度过高]]></enum>
+      <enum key="53"><![CDATA[电抗器温度过高]]></enum>
+      <enum key="54"><![CDATA[环境温度过高]]></enum>
+      <enum key="55"><![CDATA[环境温度过低]]></enum>
+      <enum key="61"><![CDATA[半导体器件控制反馈]]></enum>
+      <enum key="62"><![CDATA[半导体器件控制反馈]]></enum>
+      <enum key="63"><![CDATA[半导体器件控制反馈]]></enum>
+      <enum key="64"><![CDATA[半导体器件控制反馈]]></enum>
+      <enum key="65"><![CDATA[半导体器件控制反馈]]></enum>
+      <enum key="66"><![CDATA[半导体器件控制反馈]]></enum>
+      <enum key="101"><![CDATA[自检错误]]></enum>
+      <enum key="102"><![CDATA[自检错误]]></enum>
+      <enum key="103"><![CDATA[自检错误]]></enum>
+      <enum key="104"><![CDATA[自检错误]]></enum>
+      <enum key="105"><![CDATA[自检错误]]></enum>
+      <enum key="106"><![CDATA[自检错误]]></enum>
+      <enum key="107"><![CDATA[自检错误]]></enum>
+      <enum key="108"><![CDATA[自检错误]]></enum>
+      <enum key="109"><![CDATA[自检错误]]></enum>
+      <enum key="110"><![CDATA[自检错误]]></enum>
+      <enum key="111"><![CDATA[自检错误]]></enum>
+      <enum key="112"><![CDATA[自检错误]]></enum>
+      <enum key="113"><![CDATA[自检错误]]></enum>
+      <enum key="114"><![CDATA[自检错误]]></enum>
+      <enum key="115"><![CDATA[自检错误]]></enum>
+      <enum key="116"><![CDATA[自检错误]]></enum>
+    </fault>
+  </handler>
+  <handler id="3">
+    <fault type="1" isflag="false">
+      <enum key="1"><![CDATA[防雷故障]]></enum>
+    </fault>
+    <fault type="2" isflag="false">
+      <enum key="1"><![CDATA[防雷故障]]></enum>
+    </fault>
+    <fault type="3" isflag="false">
+      <enum key="1"><![CDATA[防雷故障]]></enum>
+    </fault>
+    <fault type="4" isflag="false">
+      <enum key="1"><![CDATA[过流故障]]></enum>
+    </fault>
+    <fault type="5" isflag="false">
+      <enum key="1"><![CDATA[风扇故障]]></enum>
+    </fault>
+  </handler>
+  <handler id="4">
+    <fault type="1" isflag="false">
+      <enum key="1"><![CDATA[防雷故障]]></enum>
+    </fault>
+    <fault type="2" isflag="false">
+      <enum key="1"><![CDATA[光伏子方阵故障]]></enum>
+    </fault>
+  </handler>
+</config>

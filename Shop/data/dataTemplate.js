@@ -40,7 +40,7 @@
 var select = [
     {
         name: '手机品牌', index: 1, data: [
-        { id: 1, name: '苹果' },
+        { id: 1, name: "苹果" },
         { id: 2, name: '三星' },
         { id: 3, name: '华为' },
         { id: 4, name: '诺基亚' },

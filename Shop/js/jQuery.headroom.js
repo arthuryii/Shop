@@ -24,7 +24,6 @@
             if (!data) {
                 data = new Headroom(this, options);
                 data.init();
-                console.log("init");
                 $this.data('headroom', data);
             }
             if (typeof option === 'string') {

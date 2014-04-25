@@ -5,36 +5,47 @@
     background-repeat: no-repeat;
 }
 
-#content {
+#content_common {
     padding: 60px 15px 60px;
 }
 
-.hidden{
-    display:none;
+#content_diy {
+    padding: 60px 15px 60px;
 }
-.preview-sm{
-    width:150px;
-    height:200px;
+
+.hidden {
+    display: none;
 }
-.left-5{
-    margin-left:5px;
+
+.preview-sm {
+    width: 150px;
+    height: 200px;
 }
+
+.left-5 {
+    margin-left: 5px;
+}
+
 .text-price {
-    font-weight:bold;
-    font-family:Verdana;
+    font-weight: bold;
+    font-family: Verdana;
 }
+
 .text-title {
-    height:40px;
-    overflow:hidden;
+    height: 40px;
+    overflow: hidden;
 }
+
 .label-lg {
-    line-height:40px;
-    height:40px;
+    line-height: 40px;
+    height: 40px;
 }
+
 .nav-pills > li > a {
-    padding:0 15px;
-    line-height:40px;
+    padding: 0 15px;
+    line-height: 40px;
 }
+
 #btn-collapse {
-    cursor:pointer;
+    cursor: pointer;
 }

@@ -1,4 +1,10 @@
 ﻿var params = [];
+var reg_id = /@id/g;
+var reg_pid = /@pid/g;
+var reg_img_path = /@img_path/g;
+var reg_name = /@name/g;
+var reg_price = /@price/g;
+var reg_count = /@count/g;
 
 function GenerateParams() {
     var maxIndex = params.length - 1;
@@ -23,6 +29,14 @@ function Tada(jqEle) {
     });
 }
 
+function Replace(from, to, onhide, onshow) {
+    from.removeClass().addClass('fadeOutDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+        onhide && onhide();
+        from.addClass('hidden');
+        to.removeClass().addClass('fadeInUp animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', onshow);
+    });
+}
+
 var phoneType = ['iPhone 5S', 'iPhone 5C', 'iPhone 5', 'iPhone 4S', 'iPhone 4', 'Galaxy S5', 'Galaxy Note3', 'Galaxy Note2', 'Galaxy S4'];
 
 function sel_Phone(index) {
@@ -30,29 +44,94 @@ function sel_Phone(index) {
     Tada($("#selected_Phone"));
 }
 
-$(function () {
-    var reg_id = /@id/g;
-    var reg_pid = /@pid/g;
-    var reg_img_path = /@img_path/g;
-    var reg_name = /@name/g;
-    var reg_price = /@price/g;
-    var reg_count = /@count/g;
-
-    Tada($("#logo").click(function () {
-        Tada($(this))
-    }));
+function showProgress(title) {
     var dialog = bootbox.dialog({
         message: '<div class="progress progress-striped active">' +
             '<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">' +
-            '<span class="sr-only">45% Complete</span>' +
+            '<span class="sr-only">Progress Bar</span>' +
             '</div>' +
             '</div>',
         title: "正在努力地加载...",
         closeButton: false
     });
+    var dc = {};
+    dc.maxValue = 100;
+    dc.minValue = 0;
+    dc.setProgressValue = function (value) {
+        if (value >= this.minValue && value <= this.maxValue) {
+            var v = value - this.minValue;
+            var r = this.maxValue - this.minValue;
+            var pn = v / r * 100.0;
+            dialog.find('.progress-bar').css("width", pn + '%');
+        }
+    }
+    dc.hide = function () {
+        dialog.modal('hide')
+    }
+    return dc;
+}
+
+function showCommon() {
+    if ($("#content_common").hasClass("hidden"))
+        Replace($("#content_diy"), $("#content_common"))
+    var dialog = showProgress();
+    dialog.setProgressValue(50);
+    var html = "<div class='row'>";
+    var template = '<div class="col-md-2"><div class="thumbnail"><img class="preview-sm" src="@img_path" alt="@name"/><div class="caption"><p class="text-center text-title">@name</p><p class="text-danger text-center"><font class="text-price">￥@price</font></p><p class="text-warning text-center">库存数量：@count</p><p class="btn-group-sm text-center"><a href="javascript:buy(@id)" type="button" class="btn btn-success">快速购买</a><a href="javascript:details(@id)" type="button" class="left-5 btn btn-default">查看详情</a></p></div></div></div>';
+    for (var i = 0; i < shell_list.length; i++) {
+        var temp = template.replace(reg_id, shell_list[i].id);
+        temp = temp.replace(reg_img_path, shell_list[i].img_path);
+        temp = temp.replace(reg_name, shell_list[i].name);
+        temp = temp.replace(reg_price, shell_list[i].price.toFixed(2));
+        temp = temp.replace(reg_count, shell_list[i].count);
+        html += temp;
+        if (i % 6 == 5) {
+            html += "</div>";
+            if (i != shell_list.length - 1)
+                html += "<div class='row'>";
+            dialog.setProgressValue(50 + i * 50.0 / shell_list.length);
+        }
+    }
+    $("#nav_common").addClass("active");
+    $("#nav_diy").removeClass("active");
+    $("#items").html(html);
+    dialog.hide();
+}
+
+function showDIY() {
+    if ($("#content_diy").hasClass("hidden"))
+        Replace($("#content_common"), $("#content_diy"))
+    var dialog = showProgress();
+    dialog.setProgressValue(100);
+    //var html = "<div class='row'>";
+    //var template = '<div class="col-md-2"><div class="thumbnail"><img class="preview-sm" src="@img_path" alt="@name"/><div class="caption"><p class="text-center text-title">@name</p><p class="text-danger text-center"><font class="text-price">￥@price</font></p><p class="text-warning text-center">库存数量：@count</p><p class="btn-group-sm text-center"><a href="javascript:buy(@id)" type="button" class="btn btn-success">快速购买</a><a href="javascript:details(@id)" type="button" class="left-5 btn btn-default">查看详情</a></p></div></div></div>';
+    //for (var i = 0; i < shell_list.length; i++) {
+    //    var temp = template.replace(reg_id, shell_list[i].id);
+    //    temp = temp.replace(reg_img_path, shell_list[i].img_path);
+    //    temp = temp.replace(reg_name, shell_list[i].name);
+    //    temp = temp.replace(reg_price, shell_list[i].price.toFixed(2));
+    //    temp = temp.replace(reg_count, shell_list[i].count);
+    //    html += temp;
+    //    if (i % 6 == 5) {
+    //        html += "</div>";
+    //        if (i != shell_list.length - 1)
+    //            html += "<div class='row'>";
+    //        dialog.setProgressValue(50 + i * 50.0 / shell_list.length);
+    //    }
+    //}
+    //$("#items").html(html);
+    $("#nav_common").removeClass("active");
+    $("#nav_diy").addClass("active");
+    dialog.hide();
+}
+
+$(function () {
+
+    Tada($("#logo").click(function () { Tada($(this)) }));
+
     //Headroom
     $("#header").headroom({
-        "tolerance": 5,
+        "tolerance": 10,
         "offset": 50,
         "classes": {
             "initial": "animated",
@@ -61,7 +140,7 @@ $(function () {
         }
     });
     $("footer").headroom({
-        "tolerance": 5,
+        "tolerance": 10,
         "offset": 50,
         "classes": {
             "initial": "animated",
@@ -94,27 +173,5 @@ $(function () {
     }
     $("#filter").html(temp);
     //LOAD ITEMS
-    var prog = dialog.find('.progress-bar');
-    //var shell_list = load data...
-    prog.css("width", "50%");
-    var progressNum = 50;
-    var html = "<div class='row'>";
-    var template = '<div class="col-md-2"><div class="thumbnail"><img class="preview-sm" src="@img_path" alt="@name"/><div class="caption"><p class="text-center text-title">@name</p><p class="text-danger text-center"><font class="text-price">￥@price</font></p><p class="text-warning text-center">库存数量：@count</p><p class="btn-group-sm text-center"><a href="javascript:buy(@id)" type="button" class="btn btn-success">快速购买</a><a href="javascript:details(@id)" type="button" class="left-5 btn btn-default">查看详情</a></p></div></div></div>';
-    for (var i = 0; i < shell_list.length; i++) {
-        var temp = template.replace(reg_id, shell_list[i].id);
-        temp = temp.replace(reg_img_path, shell_list[i].img_path);
-        temp = temp.replace(reg_name, shell_list[i].name);
-        temp = temp.replace(reg_price, shell_list[i].price.toFixed(2));
-        temp = temp.replace(reg_count, shell_list[i].count);
-        html += temp;
-        if (i % 6 == 5) {
-            html += "</div>";
-            if (i != shell_list.length - 1)
-                html += "<div class='row'>";
-            progressNum = 50 + i * 50.0 / shell_list.length;
-            prog.css("width", progressNum + '%');
-        }
-    }
-    $("#items").html(html);
-    bootbox.hideAll()
+    showCommon();
 })

@@ -1,0 +1,5 @@
+C:\Users\Work\Documents\GitHub\Shop\Shop\bin\Shop.dll
+C:\Users\Work\Documents\GitHub\Shop\Shop\bin\Shop.pdb
+C:\Users\Work\Documents\GitHub\Shop\Shop\obj\Release\Shop.csprojResolveAssemblyReference.cache
+C:\Users\Work\Documents\GitHub\Shop\Shop\obj\Release\Shop.dll
+C:\Users\Work\Documents\GitHub\Shop\Shop\obj\Release\Shop.pdb
